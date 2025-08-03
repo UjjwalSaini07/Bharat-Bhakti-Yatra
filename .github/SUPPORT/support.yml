@@ -1,0 +1,36 @@
+contact_links:
+  - name: 📖 Comprehensive Documentation
+    url: https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/wiki
+    about: Access detailed guides, FAQs, and setup instructions for Bharat Bhakti Yatra.
+
+  - name: 💬 Community Forum
+    url: https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/discussions
+    about: Discuss ideas, ask questions, and share knowledge with the Bharat Bhakti Yatra community.
+
+  - name: 🐞 Report an Issue
+    url: https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/issues/new?template=bug_report.yml
+    about: Found a bug or facing a problem? Let us know.
+
+  - name: 🌟 Suggest a Feature
+    url: https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/issues/new?template=feature_request.yml
+    about: Have a brilliant idea to enhance Bharat Bhakti Yatra? Suggest it here.
+
+  - name: 🚀 Contribution Guide
+    url: https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/README.md
+    about: Learn how to contribute to the project effectively.
+
+  - name: 🔐 Security Policy
+    url: https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/SECURITY.md
+    about: Understand how to report security vulnerabilities responsibly.
+
+  - name: 🌐 Official Website
+    url: http://localhost:5173/
+    about: Explore more about Bharat Bhakti Yatra's mission, vision, and community impact.
+
+  - name: 🛠 Technical Support
+    url: http://localhost:5173/support
+    about: Get personalized support for technical issues.
+
+  - name: 📝 Terms and Policies
+    url: http://localhost:5173/terms
+    about: Review our terms of service, privacy policy, and data usage guidelines.
