@@ -1,0 +1,45 @@
+{
+  "name": "bharat-bhakti-backend",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [
+    "backend",
+    "Bharat Bhakti",
+    "Node.js",
+    "Express.js",
+    "REST API",
+    "API integration",
+    "authentication",
+    "authorization",
+    "database management",
+    "MongoDB",
+    "middleware",
+    "data processing"
+  ],
+  "author": "UjjwalS <ujjwalsaini0007+bharatbhakti@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/issues"
+  },
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r dotenv/config --experimental-json-modules server.js",
+    "build": "echo 'No build step needed for plain JS'",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
