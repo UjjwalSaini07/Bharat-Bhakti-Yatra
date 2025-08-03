@@ -1,7 +1,7 @@
 {
   "name": "bharat-bhakti-backend",
   "version": "0.1.0",
-  "description": "",
+  "description": "Bharat Bhakti Backend is a Node.js and Express.js REST API for authentication, authorization, MongoDB database management, and data processing. Ideal for scalable, secure, and efficient backend solutions in modern web applications.",
   "keywords": [
     "backend",
     "Bharat Bhakti",
