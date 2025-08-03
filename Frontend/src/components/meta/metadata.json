@@ -1,0 +1,33 @@
+{
+  "viewport": "width=device-width, initial-scale=1.0",
+  "httpEquiv": "IE=edge",
+  "description": "Join Bharat Bhakti Yatra, a platform uniting India’s diverse communities—Hindu, Muslim, Sikh, Jain, and more—through shared devotion, cultural harmony, and spiritual growth. Celebrate divine love and peace in this sacred pilgrimage for India’s soul.",
+  "author": "UjjwalS",
+  "keywords": "Bharat Bhakti Yatra, spirituality, Indian culture, interfaith, Hindu, Muslim, Sikh, Jain, pilgrimage, devotion, cultural harmony, spiritual journey, India, unity, peace",
+  "og": {
+    "title": "Bharat Bhakti Yatra: Uniting India Through Spirituality",
+    "description": "Bharat Bhakti Yatra fosters unity among India’s diverse communities through devotion, cultural harmony, and spiritual growth, creating a sacred pilgrimage for all.",
+    "image": "/BharatBhaktiYatraLogo.png",
+    "url": "http://localhost:5173/",
+    "type": "website",
+    "locale": "en_IN",
+    "site_name": "Bharat Bhakti Yatra"
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Bharat Bhakti Yatra: Uniting India Through Spirituality",
+    "description": "Join a spiritual journey uniting Hindu, Muslim, Sikh, Jain, and more in shared devotion and cultural harmony for a peaceful, inclusive India.",
+    "image": "/BharatBhaktiYatraLogo.png",
+    "site": "@BharatBhaktiYatra",
+    "creator": "@UjjwalSaini0007"
+  },
+  "canonical": "http://localhost:5173/",
+  "robots": "index, follow",
+  "themeColor": "#",
+  "rating": "General",
+  "distribution": "Global",
+  "copyright": "Bharat Bhakti Yatra ©2025",
+  "applicationName": "Bharat Bhakti Yatra",
+  "appleMobileWebAppTitle": "Bharat Bhakti Yatra",
+  "appleMobileWebAppCapable": "yes"
+}
