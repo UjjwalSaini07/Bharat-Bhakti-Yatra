@@ -56,7 +56,7 @@ Join hands in a spiritual journey that brings together India’s vibrant communi
 
 ## Demo 🖥️
 
-You can visit the live site here : (--Temporarily Not Deployed--) : Under Development
+You can visit the live site here : [WebLink](https://bharatbhakti-yatra.vercel.app/) : Under Development
 
 ## Technologies Used 👨🏻‍💻
 - **React.js** – A powerful JavaScript library for building fast and scalable web applications.
