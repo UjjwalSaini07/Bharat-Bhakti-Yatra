@@ -1,0 +1,41 @@
+name: 'Dependency & Security Scan'
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # Weekly scan
+  workflow_dispatch:
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Run Security Audit
+        run: pnpm audit --audit-level=moderate
+
+      - name: Create Issue if Vulnerabilities Found
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const auditOutput = fs.readFileSync('npm_audit.json', 'utf8');
+            const vulnerabilities = JSON.parse(auditOutput);
+            if (vulnerabilities.metadata.totalDependencies > 0) {
+              await github.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: "⚠️ Security / Dependency Update Required",
+                body: "Some dependencies have vulnerabilities or are outdated. Please review `npm audit` results and update them."
+              });
+            }
