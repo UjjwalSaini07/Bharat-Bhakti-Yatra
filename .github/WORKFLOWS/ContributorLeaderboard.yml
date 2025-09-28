@@ -1,0 +1,61 @@
+name: '🌸 Top Contributors Recognition - Bharat-Bhakti-Yatra'
+
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Every Monday at 9 AM UTC
+
+jobs:
+  leaderboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Top Contributors
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const contributors = await github.repos.listContributors({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 5
+            });
+
+            if (contributors.data.length === 0) {
+              console.log("No contributors found this week.");
+              return;
+            }
+
+            // Prepare leaderboard
+            const topContributors = contributors.data.map((c, index) => {
+              let medal = "";
+              if (index === 0) medal = "🥇";
+              else if (index === 1) medal = "🥈";
+              else if (index === 2) medal = "🥉";
+              else medal = "🌟";
+
+              return `${medal} @${c.login} — **${c.contributions} contributions**`;
+            }).join("\n");
+
+            // Build appreciation message
+            const body = `
+🌸 **Bharat-Bhakti-Yatra: Top Contributors of the Week** 🌸
+
+Let's celebrate our amazing contributors who help make this spiritual journey of unity and devotion shine! 🙏
+
+${topContributors}
+
+💖 Your dedication strengthens the project and inspires the community.  
+
+✨ **Keep contributing and spreading positivity!** Every effort counts in this sacred journey.  
+
+_New contributors are always welcome! Explore issues labeled \`good first issue\` or \`help wanted\` to get started._ 🌺
+`;
+
+            // Create issue to recognize contributors
+            await github.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "🏆 Top Contributors of the Week",
+              body: body
+            });
+
+            console.log("✅ Top contributors recognition issue created successfully.");
