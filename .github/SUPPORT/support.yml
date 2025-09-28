@@ -24,13 +24,13 @@ contact_links:
     about: Understand how to report security vulnerabilities responsibly.
 
   - name: 🌐 Official Website
-    url: http://localhost:5173/
+    url: https://bharatbhakti-yatra.vercel.app/
     about: Explore more about Bharat Bhakti Yatra's mission, vision, and community impact.
 
   - name: 🛠 Technical Support
-    url: http://localhost:5173/support
+    url: https://bharatbhakti-yatra.vercel.app/support
     about: Get personalized support for technical issues.
 
   - name: 📝 Terms and Policies
-    url: http://localhost:5173/terms
+    url: https://bharatbhakti-yatra.vercel.app/terms
     about: Review our terms of service, privacy policy, and data usage guidelines.
