@@ -1,0 +1,87 @@
+name: '🌸 Greetings & Spiritual Welcome - Bharat-Bhakti-Yatra'
+
+on:
+  push:
+    branches:
+      - main
+  issues:
+    types: [opened] # Trigger when a new issue is opened
+  pull_request_target:
+    types: [opened] # Trigger when a new PR is opened
+
+jobs:
+  welcome:
+    name: 'Welcome New Contributors 🌺'
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Send personalized spiritual welcome messages
+      - name: Send Spiritual Welcome
+        uses: EddieHubCommunity/gh-action-community@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Message for newly opened issues
+          issue-message: |
+            🌸 **Namaste @${{ github.actor }}!**
+            Welcome to **Bharat-Bhakti-Yatra**. Thank you for opening a new issue and joining this divine journey of unity and devotion.  
+
+            🙏 **Your contribution matters:** Each issue helps us create a harmonious spiritual experience that connects hearts and souls across India’s diverse communities—Hindu, Muslim, Sikh, Jain, and more.  
+
+            🔹 Our team will review your issue and respond promptly. Please provide any additional context to help us improve this sacred journey.  
+
+            🌺 **Tip:** Label your issue clearly to guide us in addressing it efficiently.  
+
+            Let’s walk this path of oneness together! ✨
+
+          # Message for newly opened pull requests
+          pr-message: |
+            🌟 **Blessings, @${{ github.actor }}!**
+            Thank you for contributing to **Bharat-Bhakti-Yatra** through your pull request. Your efforts bring us closer to a shared spiritual and cultural harmony.  
+
+            🔹 **What happens next:** Our maintainers will review your PR and provide constructive feedback.  
+            🔹 **Best practices:** Include a clear description, reference related issues, and ensure any updates reflect our spiritual and cultural values.  
+
+            🙏 **Tip:** Every contribution, big or small, helps nurture the spirit of unity in diversity. Keep shining your light!  
+
+            Together, let’s celebrate India’s sacred diversity and shared devotion. 🌺
+
+          # Footer message for all contributions
+          footer: |
+            🌸 **Welcome to the Bharat-Bhakti-Yatra community!**  
+            Join hands in a spiritual journey that brings together India’s vibrant communities—Hindu, Muslim, Sikh, Jain, and more—in a celebration of unity and devotion.  
+
+            📖 Please review our [contributing guidelines](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/CONTRIBUTING.md) to align with our shared values.  
+            🏷️ *Optional:* Add labels like `help wanted` or `good first issue` to guide contributions.  
+
+            Let your spirit be part of this divine awakening. Thank you for helping us make this journey meaningful and harmonious! 🙏
+
+      # Step 3: Add a “welcome” label to new issues/PRs
+      - name: Add Welcome Label
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            if (context.eventName === 'issues' || context.eventName === 'pull_request_target') {
+              const { data: issue } = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number
+              });
+
+              const labels = issue.labels.map(l => l.name);
+              if (!labels.includes('welcome')) {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  labels: ['welcome']
+                });
+                console.log(`🏷️ Added 'welcome' label to #${context.issue.number}`);
+              }
+            } else {
+              console.log('⚠️ Skipped adding label: Not an issue or PR event');
+            }

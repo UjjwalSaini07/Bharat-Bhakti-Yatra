@@ -1,0 +1,34 @@
+name: '🌿 Stale Issue / PR Reminder - Bharat-Bhakti-Yatra'
+
+on:
+  schedule:
+    - cron: '0 0 * * 1,4' # Every Monday and Thursday at 00:00 UTC
+
+jobs:
+  stale-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mark Stale Issues/PRs
+        uses: actions/stale@v6
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-stale: 30
+          days-before-close: 7
+          stale-issue-message: |
+            ⚠️ Namaste! This issue has been inactive for 30 days.  
+            🙏 Kindly update or provide more context so we can continue this spiritual journey together.  
+            If no response is received, this issue may be closed to keep our repository focused and active.  
+            🌸 Thank you for contributing to Bharat-Bhakti-Yatra!
+          stale-pr-message: |
+            ⚠️ Namaste! This pull request has been inactive for 30 days.  
+            🙏 Please update it or respond to feedback so we can merge it into our sacred journey.  
+            Otherwise, it may be closed to maintain focus and clarity.  
+            🌺 Your efforts are appreciated—thank you for contributing!
+          exempt-labels: "Best Solutions,Great Changes,Good First Issue,Consistent Contributor"
+          operations-per-run: 50
+          days-before-stale-pr: 30
+          days-before-close-pr: 7
+          close-issue-message: |
+            🚪 This issue is being closed due to inactivity.  
+            If you believe this was done in error or have more information to add, please feel free to reopen it or create a new issue.  
+            🌸 Thank you for being part of the Bharat-Bhakti-Yatra community!

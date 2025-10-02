@@ -1,0 +1,72 @@
+name: 'Open-Issue Reminder'
+
+# Trigger the workflow daily at 4:15 AM UTC
+on:
+  schedule:
+    - cron: '15 4 * * *'
+
+jobs:
+  remind-open-issues:
+    runs-on: ubuntu-latest
+    name: 'Notify About Open Issues'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Fetch and Remind Open Issues
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Fetch all open issues in the repository
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            if (issues.length === 0) {
+              console.log("✅ No open issues found today. All clear!");
+            } else {
+              console.log(`📌 Found ${issues.length} open issue(s). Sending reminders...`);
+            }
+
+            for (const issue of issues) {
+              // Skip PRs (since they also show up in issues API)
+              if (issue.pull_request) continue;
+
+              // Build dynamic message
+              const assignees = issue.assignees.map(a => `@${a.login}`).join(', ') || 'None';
+              const issueComment = `👋 Hello! This issue is still open. Please update us if you're working on it or if it needs attention.\n\n**Assignees:** ${assignees}\n**Issue Link:** ${issue.html_url}`;
+
+              // Post comment on the issue
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: issueComment
+              });
+
+              console.log(`✅ Reminder posted on issue #${issue.number}`);
+
+              // Optional: Add a "reminder-sent" label if it doesn't exist
+              const labelExists = issue.labels.some(label => label.name === 'reminder-sent');
+              if (!labelExists) {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  labels: ['reminder-sent']
+                });
+                console.log(`🏷️ Added 'reminder-sent' label to issue #${issue.number}`);
+              }
+            }
+
+      - name: Workflow Complete
+        run: echo "🎉 All open issues processed successfully!"

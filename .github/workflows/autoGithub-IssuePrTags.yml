@@ -1,0 +1,82 @@
+name: '🏷 Auto Assign Labels - Bharat-Bhakti-Yatra'
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  label-assigner:
+    runs-on: ubuntu-latest
+    name: 'Auto Assign Labels to New Issues & PRs'
+    steps:
+      - name: Assign Labels
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue = context.payload.issue || context.payload.pull_request;
+            const isPR = !!context.payload.pull_request;
+            const labelsToAdd = [];
+
+            // Define label assignment logic
+            if (!issue) return;
+
+            // Auto assign based on title/keywords
+            const title = (issue.title || "").toLowerCase();
+
+            // Bug related
+            if (title.includes("bug") || title.includes("error") || title.includes("fail")) {
+              labelsToAdd.push("bug");
+            }
+
+            // Enhancement / New feature
+            if (title.includes("feature") || title.includes("enhancement") || title.includes("add")) {
+              labelsToAdd.push("enhancement");
+            }
+
+            // Documentation
+            if (title.includes("doc") || title.includes("readme") || title.includes("guide")) {
+              labelsToAdd.push("documentation");
+            }
+
+            // Quick fixes
+            if (title.includes("fix") || title.includes("typo") || title.includes("small")) {
+              labelsToAdd.push("Quick Fix");
+            }
+
+            // Good first issue
+            if (title.includes("beginner") || title.includes("first") || title.includes("easy")) {
+              labelsToAdd.push("good first issue");
+            }
+
+            // GSOC 25 tag
+            if (title.includes("gsoc") || title.includes("gssoc25")) {
+              labelsToAdd.push("gssoc25");
+            }
+
+            // Team Player / Consistent Contributor
+            if (title.includes("collab") || title.includes("team") || title.includes("contributor")) {
+              labelsToAdd.push("Team Player");
+              labelsToAdd.push("Consistent Contributor");
+            }
+
+            // Miscellaneous labels
+            if (!labelsToAdd.length) {
+              labelsToAdd.push("help wanted"); // default label if nothing else matches
+            }
+
+            // Add all labels
+            await github.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: labelsToAdd
+            });
+
+            console.log(`🏷 Assigned labels: ${labelsToAdd.join(", ")} to #${issue.number}`);

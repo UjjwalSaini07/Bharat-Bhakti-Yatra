@@ -1,0 +1,72 @@
+name: 'Dependency & Security Scan'
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # Weekly scan every Monday at 02:00 UTC
+  workflow_dispatch:
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Run Security Audit (JSON output)
+        run: pnpm audit --json > npm_audit.json || true
+
+      - name: Create Issue if Vulnerabilities Found
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = 'npm_audit.json';
+
+            if (!fs.existsSync(path)) {
+              console.log("⚠️ No audit report found. Skipping.");
+              return;
+            }
+
+            const auditOutput = JSON.parse(fs.readFileSync(path, 'utf8'));
+
+            const totalVulns = Object.values(auditOutput.metadata.vulnerabilities)
+              .reduce((sum, val) => sum + val, 0);
+
+            if (totalVulns > 0) {
+              const body = `
+              ⚠️ **Security / Dependency Update Required**
+
+              Some dependencies have vulnerabilities detected by \`pnpm audit\`.
+
+              **Summary:**
+              - Total Vulnerabilities: ${totalVulns}
+              - Breakdown: ${JSON.stringify(auditOutput.metadata.vulnerabilities, null, 2)}
+
+              👉 Please review and update the affected packages.
+              `;
+
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: "⚠️ Security / Dependency Update Required",
+                body
+              });
+
+              console.log(`🚨 Security issue created with ${totalVulns} vulnerabilities.`);
+            } else {
+              console.log("✅ No vulnerabilities found. All clear!");
+            }
