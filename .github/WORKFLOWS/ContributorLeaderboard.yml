@@ -3,17 +3,19 @@ name: '🌸 Top Contributors Recognition - Bharat-Bhakti-Yatra'
 on:
   schedule:
     - cron: '0 9 * * 1' # Every Monday at 9 AM UTC
+  workflow_dispatch:
 
 jobs:
   leaderboard:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch Top Contributors
+      - name: Fetch Top Contributors and Post Discussion
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const contributors = await github.repos.listContributors({
+            // Fetch contributors
+            const contributors = await github.rest.repos.listContributors({
               owner: context.repo.owner,
               repo: context.repo.repo,
               per_page: 5
@@ -50,12 +52,26 @@ ${topContributors}
 _New contributors are always welcome! Explore issues labeled \`good first issue\` or \`help wanted\` to get started._ 🌺
 `;
 
-            // Create issue to recognize contributors
-            await github.issues.create({
+            // Find a valid discussion category (e.g., "Announcements")
+            const categories = await github.rest.discussions.listCategories({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: "🏆 Top Contributors of the Week",
-              body: body
             });
 
-            console.log("✅ Top contributors recognition issue created successfully.");
+            const category = categories.data.find(c => c.name === "Announcements") || categories.data[0];
+
+            if (!category) {
+              console.log("⚠️ No discussion categories found. Please enable Discussions in your repo.");
+              return;
+            }
+
+            // Create discussion instead of issue
+            await github.rest.discussions.createDiscussion({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              category_id: category.id,
+              title: "🏆 Top Contributors of the Week",
+              body
+            });
+
+            console.log("✅ Top contributors recognition discussion created successfully.");
