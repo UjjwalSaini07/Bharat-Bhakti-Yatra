@@ -1,14 +1,13 @@
 name: '🌸 Greetings & Spiritual Welcome - Bharat-Bhakti-Yatra'
 
 on:
-  fork: {}
   push:
     branches:
       - main
   issues:
-    types: [opened]  # Trigger when a new issue is opened
+    types: [opened] # Trigger when a new issue is opened
   pull_request_target:
-    types: [opened]  # Trigger when a new PR is opened
+    types: [opened] # Trigger when a new PR is opened
 
 jobs:
   welcome:
@@ -21,7 +20,7 @@ jobs:
 
       # Step 2: Send personalized spiritual welcome messages
       - name: Send Spiritual Welcome
-        uses: EddieHubCommunity/gh-action-community/src/welcome@main
+        uses: EddieHubCommunity/gh-action-community@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -66,19 +65,23 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { data: issue } = await github.rest.issues.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number
-            });
-
-            const labels = issue.labels.map(l => l.name);
-            if (!labels.includes('welcome')) {
-              await github.rest.issues.addLabels({
+            if (context.eventName === 'issues' || context.eventName === 'pull_request_target') {
+              const { data: issue } = await github.rest.issues.get({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: context.issue.number,
-                labels: ['welcome']
+                issue_number: context.issue.number
               });
-              console.log(`🏷️ Added 'welcome' label to #${context.issue.number}`);
+
+              const labels = issue.labels.map(l => l.name);
+              if (!labels.includes('welcome')) {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  labels: ['welcome']
+                });
+                console.log(`🏷️ Added 'welcome' label to #${context.issue.number}`);
+              }
+            } else {
+              console.log('⚠️ Skipped adding label: Not an issue or PR event');
             }
