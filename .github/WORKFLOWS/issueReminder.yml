@@ -3,7 +3,7 @@ name: 'Open-Issue Reminder'
 # Trigger the workflow daily at 4:15 AM UTC
 on:
   schedule:
-    - cron: '15 4 * * *' 
+    - cron: '15 4 * * *'
 
 jobs:
   remind-open-issues:
@@ -24,7 +24,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             // Fetch all open issues in the repository
-            const { data: issues } = await github.issues.listForRepo({
+            const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
@@ -38,12 +38,15 @@ jobs:
             }
 
             for (const issue of issues) {
+              // Skip PRs (since they also show up in issues API)
+              if (issue.pull_request) continue;
+
               // Build dynamic message
               const assignees = issue.assignees.map(a => `@${a.login}`).join(', ') || 'None';
               const issueComment = `👋 Hello! This issue is still open. Please update us if you're working on it or if it needs attention.\n\n**Assignees:** ${assignees}\n**Issue Link:** ${issue.html_url}`;
 
               // Post comment on the issue
-              await github.issues.createComment({
+              await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
@@ -51,11 +54,11 @@ jobs:
               });
 
               console.log(`✅ Reminder posted on issue #${issue.number}`);
-              
+
               // Optional: Add a "reminder-sent" label if it doesn't exist
               const labelExists = issue.labels.some(label => label.name === 'reminder-sent');
               if (!labelExists) {
-                await github.issues.addLabels({
+                await github.rest.issues.addLabels({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: issue.number,

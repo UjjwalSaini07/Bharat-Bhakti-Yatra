@@ -2,7 +2,7 @@ name: '🌿 Stale Issue / PR Reminder - Bharat-Bhakti-Yatra'
 
 on:
   schedule:
-    - cron: '0 0 * * 1' # Every Monday at 00:00 UTC
+    - cron: '0 0 * * 1,4' # Every Monday and Thursday at 00:00 UTC
 
 jobs:
   stale-check:
@@ -24,11 +24,7 @@ jobs:
             🙏 Please update it or respond to feedback so we can merge it into our sacred journey.  
             Otherwise, it may be closed to maintain focus and clarity.  
             🌺 Your efforts are appreciated—thank you for contributing!
-          exempt-labels: |
-            Best Solutions,
-            Great Changes,
-            Good First Issue,
-            Consistent Contributor
+          exempt-labels: "Best Solutions,Great Changes,Good First Issue,Consistent Contributor"
           operations-per-run: 50
           days-before-stale-pr: 30
           days-before-close-pr: 7
