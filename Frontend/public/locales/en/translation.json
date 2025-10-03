@@ -1,0 +1,12 @@
+{
+  "welcome": "Welcome to Bharat-Bhakti-Yatra.",
+  "language_selector": "Current Language",
+  "navigation": {
+    "home": "Home",
+    "about": "About Yatra",
+    "login": "Login"
+  },
+  "content": {
+    "message": "This entire website is now ready for global audience expansion."
+  }
+}
