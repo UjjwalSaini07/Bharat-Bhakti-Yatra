@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher'; // Import the switcher
+import { i18n } from 'react-i18next';
 
 /**
  * A simple component to demonstrate i18n functionality.
@@ -23,6 +24,7 @@ function ExampleUsage() {
       
       <p>
         <strong>{t('navigation.home')}:</strong> 
+        // eslint-disable-next-line no-undef
         The current language setting is: <strong>{i18n.language.toUpperCase()}</strong>.
       </p>
 

@@ -1,45 +1,41 @@
-// Frontend/src/i18n.js
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import HttpBackend from 'i18next-http-backend';
+const resources = {
+  en: {
+    translation: {
+      // Homepage
+      appName: "Bharat Bhakti Yatra",
+      welcome_suffix: "Welcome to our spiritual journey",
+      subtitle: "Discover the divine culture of India",
+      join: "Join the Journey",
 
-i18n
-  // 1. Load translations via HTTP
-  .use(HttpBackend) 
-  // 2. Detect and cache user language
-  .use(LanguageDetector)
-  // 3. Pass the i18n instance to react-i18next
-  .use(initReactI18next)
-  .init({
-    fallbackLng: 'en',
-    supportedLngs: ['en', 'hi'], 
-    
-    // 💡 CRITICAL for preference saving and language detection order
-    detection: {
-      order: ['queryString', 'cookie', 'localStorage', 'navigator'],
-      // Save language preference here
-      caches: ['localStorage', 'cookie'], 
+      // Success Page
+      journey_success_title: "🚀 You Joined the Journey!",
+      journey_success_msg: "Thank you for being part of Bharat Bhakti Yatra 🙏",
     },
-    
-    // Path to the translation files in the public folder
-    backend: {
-        loadPath: '/locales/{{lng}}/translation.json', 
-    },
-    
-    // Allows us to use nested keys (e.g., 'header.title')
-    keySeparator: '.',
-    
-    interpolation: {
-      escapeValue: false, // React protects against XSS
-    },
+  },
+  hi: {
+    translation: {
+      // Homepage
+      appName: "भारत भक्ति यात्रा",
+      welcome_suffix: "हमारी आध्यात्मिक यात्रा में आपका स्वागत है",
+      subtitle: "भारत की दिव्य संस्कृति की खोज करें",
+      join: "यात्रा में शामिल हों",
 
-    react: {
-      useSuspense: true, 
+      // Success Page
+      journey_success_title: "🚀 आपने यात्रा में भाग लिया!",
+      journey_success_msg: "भारत भक्ति यात्रा का हिस्सा बनने के लिए धन्यवाद 🙏",
     },
-    
-    debug: false, 
-  });
+  },
+};
+
+i18n.use(initReactI18next).init({
+  resources,
+  lng: "en", // default language
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
 export default i18n;

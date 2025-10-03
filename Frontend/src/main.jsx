@@ -1,30 +1,28 @@
 // Frontend/src/main.jsx
 
-import { StrictMode, Suspense } from "react"; // 💡 Suspense is imported
-import { createRoot } from "react-dom/client";
-
-// 🛠 Polyfill matchMedia (keeping your original fix)
+// 🛠 Fix: Polyfill matchMedia so UI libs don't break
 if (typeof window !== "undefined" && !window.matchMedia) {
-  window.matchMedia = () => ({
-    matches: false,
-    addListener: () => {},
-    removeListener: () => {},
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    dispatchEvent: () => false,
-  });
+  window.matchMedia = () => ({
+    matches: false,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  });
 }
 
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
-import "./i18n"; // initialize i18n configuration
+import "./i18n"; // initialize i18n
 import App from "./App.jsx";
 
-// 🚀 Wrap App with Suspense to wait for translations to load from the network
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    {/* The fallback prop displays a loading message while files are fetched */}
-    <Suspense fallback={<div>Loading...</div>}> 
-      <App />
-    </Suspense>
-  </StrictMode>
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
 );
