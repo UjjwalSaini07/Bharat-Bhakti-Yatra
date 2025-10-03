@@ -2,8 +2,12 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+<<<<<<< HEAD
 import LanguageSwitcher from './LanguageSwitcher'; // Import the switcher
 import { i18n } from 'react-i18next';
+=======
+import LanguageSwitcher from './components/LanguageSwitcher'; // Import the switcher
+>>>>>>> 00569dc5f8ecabe6fdaa07085b01b31e4fdc2a4f
 
 /**
  * A simple component to demonstrate i18n functionality.

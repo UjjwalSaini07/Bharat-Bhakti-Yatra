@@ -1,21 +1,20 @@
 // Frontend/src/components/LanguageSwitcher.jsx
+// This component handles the one-click language switching mechanism.
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'; // Dependency import is critical
 
 /**
- * Renders two buttons to switch the site language between English (en) and Hindi (hi).
+ * Component to allow users to switch between supported languages (English and Hindi).
  */
 function LanguageSwitcher() {
-  // Get the i18n instance to change the language
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(); // Get t and i18n instances
 
   const changeLanguage = (lng) => {
-    // This instantly updates the UI and saves the preference via LanguageDetector
+    // This updates the UI instantly and saves the preference via LanguageDetector
     i18n.changeLanguage(lng);
   };
   
-  // Example translation keys for button text/titles (optional but good practice)
   const isEnglish = i18n.language.startsWith('en');
 
   return (
