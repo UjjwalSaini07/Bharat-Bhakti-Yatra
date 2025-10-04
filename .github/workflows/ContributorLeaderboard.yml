@@ -1,18 +1,18 @@
-name: '🌸 Top Contributors Recognition - Bharat-Bhakti-Yatra'
+name: '🌸 Weekly Top Contributors - Bharat-Bhakti-Yatra'
 
 on:
   schedule:
-    - cron: '0 9 * * 1'
+    - cron: '0 9 * * 1' # Every Monday at 9 AM UTC
   workflow_dispatch:
 
 jobs:
   leaderboard:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Post Top Contributors Issue
+      - name: Post Weekly Top Contributors Issue
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -28,33 +28,62 @@ jobs:
               return;
             }
 
+            // Generate leaderboard with medals and personalized comments
             const topContributors = contributors.map((c, index) => {
-              let medal = index === 0 ? "🥇" :
-                          index === 1 ? "🥈" :
-                          index === 2 ? "🥉" : "🌟";
-              return `${medal} @${c.login} — **${c.contributions} contributions**`;
+              let medal, comment;
+              switch(index){
+                case 0:
+                  medal = "🥇"; comment = "Outstanding contribution! 🌟";
+                  break;
+                case 1:
+                  medal = "🥈"; comment = "Excellent work! ✨";
+                  break;
+                case 2:
+                  medal = "🥉"; comment = "Great effort! 🙏";
+                  break;
+                default:
+                  medal = "🌟"; comment = "Thank you for your contribution! 💖";
+              }
+              return `${medal} @${c.login} — **${c.contributions} contributions** — _${comment}_`;
             }).join("\n");
 
+            // Build professional, engaging issue body
             const body = [
-              "🌸 **Bharat-Bhakti-Yatra: Top Contributors of the Week** 🌸",
+              "🌸 **Bharat-Bhakti-Yatra: Weekly Top Contributors** 🌸",
               "",
-              "Let's celebrate our amazing contributors who help make this spiritual journey of unity and devotion shine! 🙏",
+              "A huge **thank you** to our amazing contributors who keep this spiritual journey of unity and devotion alive! 🙏",
               "",
               topContributors,
               "",
-              "💖 Your dedication strengthens the project and inspires the community.",
+              "💡 **Weekly Summary:**",
+              "- Total PRs merged:  " + contributors.reduce((sum, c) => sum + c.contributions, 0),
+              "- Issues resolved:  TBD", // optional: you can fetch issues count if needed
+              "- Notable contributions: bug fixes, documentation improvements, and community engagement 🌱",
               "",
-              "✨ **Keep contributing and spreading positivity!** Every effort counts in this sacred journey.",
+              "🎉 **Shoutouts:**",
+              "- Special thanks to contributors who went above and beyond this week 🚀",
+              "- Every contribution, big or small, adds to our vibrant community 🌺",
               "",
-              "_New contributors are always welcome! Explore issues labeled `good first issue` or `help wanted` to get started._ 🌺"
+              "🌟 **Next Steps & Opportunities:**",
+              "- Explore issues labeled `good first issue` or `help wanted` to start contributing",
+              "- Join discussions and share your thoughts on improving our project",
+              "- Help review PRs or provide feedback to support fellow contributors",
+              "",
+              "💖 **Community & Resources:**",
+              "- [Contributing Guidelines](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/CONTRIBUTING.md)",
+              "- [Project Documentation](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra)",
+              "- Stay connected with us on GitHub Discussions and share your ideas ✨",
+              "",
+              "🌺 Together, let's celebrate unity, collaboration, and devotion. Keep shining and inspiring! 🙏"
             ].join("\n");
 
-            // Create issue instead of discussion
-            await github.rest.issues.create({
+            // Create the issue
+            const issue = await github.rest.issues.create({
               owner,
               repo,
-              title: "🏆 Top Contributors of the Week",
-              body
+              title: "🏆 Weekly Top Contributors",
+              body,
+              labels: ["leaderboard"]
             });
 
-            console.log("✅ Top contributors recognition issue created successfully.");
+            console.log(`✅ Top Contributors issue created successfully: ${issue.data.html_url}`);
