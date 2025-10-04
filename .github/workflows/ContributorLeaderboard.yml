@@ -12,20 +12,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Post Top Contributors Discussion
+      - name: Post Top Contributors Issue
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.PAT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
 
-            // Ensure Discussions API exists
-            if (!github.rest.discussions) {
-              throw new Error("GitHub Discussions API unavailable. Enable Discussions and ensure token has access.");
-            }
-
-            // Fetch top contributors
+            // Fetch top 5 contributors
             const contributorsResp = await github.rest.repos.listContributors({ owner, repo, per_page: 5 });
             const contributors = contributorsResp.data;
             if (!contributors || contributors.length === 0) {
@@ -54,22 +49,12 @@ jobs:
               "_New contributors are always welcome! Explore issues labeled `good first issue` or `help wanted` to get started._ 🌺"
             ].join("\n");
 
-            // Fetch discussion categories
-            const categoriesResp = await github.rest.discussions.listCategories({ owner, repo });
-            const categories = categoriesResp.data;
-            const category = categories.find(c => c.name === "Announcements") || categories[0];
-            if (!category) {
-              console.log("⚠️ No discussion categories found. Please enable Discussions in your repo.");
-              return;
-            }
-
-            // Create discussion
-            await github.rest.discussions.createDiscussion({
+            // Create issue instead of discussion
+            await github.rest.issues.create({
               owner,
               repo,
-              category_id: category.id,
               title: "🏆 Top Contributors of the Week",
               body
             });
 
-            console.log("✅ Top contributors recognition discussion created successfully.");
+            console.log("✅ Top contributors recognition issue created successfully.");
