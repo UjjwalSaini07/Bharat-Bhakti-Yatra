@@ -1,4 +1,4 @@
-name: 'Open-Issue Reminder'
+name: '❌ Open-Issue Reminder'
 
 on:
   schedule:
