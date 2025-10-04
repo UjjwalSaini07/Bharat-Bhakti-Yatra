@@ -1,9 +1,8 @@
 name: 'Open-Issue Reminder'
 
-# Trigger the workflow daily at 4:15 AM UTC
 on:
   schedule:
-    - cron: '15 4 * * *'
+    - cron: '0 0 * * 1,4' # Every Monday and Thursday at 00:00 UTC
 
 jobs:
   remind-open-issues:
