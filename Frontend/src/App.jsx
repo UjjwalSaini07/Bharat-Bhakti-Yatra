@@ -43,15 +43,16 @@ const HomePage = () => {
   );
 };
 
-const JoinPage = () => (
-  <div className="flex flex-col items-center justify-center min-h-screen bg-yellow-50">
-    <h2 className="text-4xl font-bold mb-4">🚀 You Joined the Journey!</h2>
-    <p className="text-lg text-gray-700">
-      Thank you for being part of Bharat Bhakti Yatra 🙏
-    </p>
-  </div>
-);
-
+const JoinPage = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-yellow-50">
+      <h2 className="text-4xl font-bold mb-4">{t('journey_success_title')}</h2>
+      <p className="text-lg text-gray-700">
+        {t('journey_success_msg')}
+      </p>
+    </div>
+  );
 const App = () => {
   return (
     <Routes>
