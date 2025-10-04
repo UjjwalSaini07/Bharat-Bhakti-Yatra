@@ -22,14 +22,14 @@ function LanguageSwitcher() {
       <button 
         onClick={() => changeLanguage('en')} 
         disabled={isEnglish}
-        title={isEnglish ? t('language_selector') : "Switch to English"}
+        title={isEnglish ? t('language_selector', 'Language selector') : "Switch to English"}
       >
         English
       </button>
       <button 
         onClick={() => changeLanguage('hi')} 
         disabled={!isEnglish}
-        title={!isEnglish ? t('language_selector') : "हिन्दी पर स्विच करें"}
+        title={!isEnglish ? t('language_selector', 'Language selector') : "हिन्दी पर स्विच करें"}
       >
         हिन्दी
       </button>
