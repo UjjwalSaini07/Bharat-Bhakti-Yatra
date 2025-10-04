@@ -1,0 +1,79 @@
+name: '🌸 Top Contributors Recognition - Bharat-Bhakti-Yatra'
+
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Every Monday at 9 AM UTC
+  workflow_dispatch:
+
+jobs:
+  leaderboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Fetch Top Contributors and Post Discussion
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Fetch top 5 contributors
+            const contributorsResp = await github.rest.repos.listContributors({
+              owner,
+              repo,
+              per_page: 5
+            });
+            const contributors = contributorsResp.data;
+            if (!contributors || contributors.length === 0) {
+              console.log("No contributors found this week.");
+              return;
+            }
+
+            // Prepare leaderboard
+            const topContributors = contributors.map((c, index) => {
+              let medal = index === 0 ? "🥇" :
+                          index === 1 ? "🥈" :
+                          index === 2 ? "🥉" : "🌟";
+              return `${medal} @${c.login} — **${c.contributions} contributions**`;
+            }).join("\n");
+
+            // Build discussion message safely
+            const body = [
+              "🌸 **Bharat-Bhakti-Yatra: Top Contributors of the Week** 🌸",
+              "",
+              "Let's celebrate our amazing contributors who help make this spiritual journey of unity and devotion shine! 🙏",
+              "",
+              topContributors,
+              "",
+              "💖 Your dedication strengthens the project and inspires the community.",
+              "",
+              "✨ **Keep contributing and spreading positivity!** Every effort counts in this sacred journey.",
+              "",
+              "_New contributors are always welcome! Explore issues labeled `good first issue` or `help wanted` to get started._ 🌺"
+            ].join("\n");
+
+            // Fetch discussion categories
+            const categoriesResp = await github.rest.discussions.listCategories({
+              owner,
+              repo
+            });
+            const categories = categoriesResp.data;
+            const category = categories.find(c => c.name === "Announcements") || categories[0];
+            if (!category) {
+              console.log("⚠️ No discussion categories found. Enable Discussions in your repo.");
+              return;
+            }
+
+            // Create discussion
+            await github.rest.discussions.createDiscussion({
+              owner,
+              repo,
+              category_id: category.id,
+              title: "🏆 Top Contributors of the Week",
+              body
+            });
+
+            console.log("✅ Top contributors recognition discussion created successfully.");
