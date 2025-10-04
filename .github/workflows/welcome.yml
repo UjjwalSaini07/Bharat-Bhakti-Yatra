@@ -18,21 +18,19 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            // Assign GitHub username to JS variable
+            // GitHub username of contributor
             const actor = context.actor;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const issue_number = context.issue.number;
 
-            // Multiline message inside JS backticks
-            const message = `
-🌸 **Namaste @${actor}!**
-Welcome to **Bharat-Bhakti-Yatra**. Thank you for opening a new issue or pull request and joining this divine journey of unity and devotion.  
-🙏 **Your contribution matters:** Each issue helps us create a harmonious spiritual experience that connects hearts and souls across India’s diverse communities—Hindu, Muslim, Sikh, Jain, and more.  
-🔹 Our team will review your submission and respond promptly. Please provide any additional context to help us improve this sacred journey.  
-🌺 **Tip:** Label your issue clearly to guide us in addressing it efficiently.  
-Let’s walk this path of oneness together! ✨
-`;
+            // Multiline string using normal quotes and \n for line breaks
+            const message = "🌸 **Namaste @" + actor + "!**\n" +
+              "Welcome to **Bharat-Bhakti-Yatra**. Thank you for opening a new issue or pull request and joining this divine journey of unity and devotion.\n" +
+              "🙏 **Your contribution matters:** Each issue helps us create a harmonious spiritual experience that connects hearts and souls across India’s diverse communities—Hindu, Muslim, Sikh, Jain, and more.\n" +
+              "🔹 Our team will review your submission and respond promptly. Please provide any additional context to help us improve this sacred journey.\n" +
+              "🌺 **Tip:** Label your issue clearly to guide us in addressing it efficiently.\n" +
+              "Let’s walk this path of oneness together! ✨";
 
             // Post comment using GitHub API
             await github.rest.issues.createComment({
@@ -67,4 +65,6 @@ Let’s walk this path of oneness together! ✨
                 labels: ['welcome']
               });
               console.log(`🏷️ Added 'welcome' label to #${issue_number}`);
+            } else {
+              console.log(`⚠️ 'welcome' label already exists for #${issue_number}`);
             }
