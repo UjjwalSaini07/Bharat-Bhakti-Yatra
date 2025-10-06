@@ -18,26 +18,49 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            // GitHub username of contributor
-            const actor = context.actor;
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            const issue_number = context.issue.number;
+            // Extract context details
+            const { actor, repo: { owner, repo }, issue: { number: issue_number } } = context;
 
-            // Multiline string using normal quotes and \n for line breaks
-            const message = "🌸 **Namaste @" + actor + "!**\n" +
-              "Welcome to **Bharat-Bhakti-Yatra**. Thank you for opening a new issue or pull request and joining this divine journey of unity and devotion.\n" +
-              "🙏 **Your contribution matters:** Each issue helps us create a harmonious spiritual experience that connects hearts and souls across India’s diverse communities—Hindu, Muslim, Sikh, Jain, and more.\n" +
-              "🔹 Our team will review your submission and respond promptly. Please provide any additional context to help us improve this sacred journey.\n" +
-              "🌺 **Tip:** Label your issue clearly to guide us in addressing it efficiently.\n" +
-              "Let’s walk this path of oneness together! ✨";
+            // Divine welcome message
+            const message = `
+            🌸 **Namaste @${actor}!**
+
+            Welcome to **Bharat-Bhakti-Yatra** — a sacred digital pilgrimage celebrating unity, devotion, and the timeless soul of India.  
+            Thank you for opening a new issue or pull request and becoming part of this divine journey. 🌼
+
+            🙏 **Your Contribution Matters:**  
+            Every issue or PR you raise helps shape a harmonious spiritual experience — one that connects hearts across India’s vibrant communities: **Hindu, Muslim, Sikh, Jain, Christian, Buddhist, and beyond.**  
+            Together, we’re crafting a shared space of love, culture, and spiritual growth.
+
+            🔹 **Our Process:**  
+            The core team will review your submission soon.  
+            Please provide any additional details or insights to help us make Bharat-Bhakti-Yatra even more inclusive, soulful, and impactful.
+
+            🌺 **Tip:**  
+            Use clear and descriptive labels for your issue or PR to help us manage and prioritize effectively.
+
+            ✨ **About Bharat-Bhakti-Yatra**  
+            Welcome to **Bharat-Bhakti!** 🙏  
+            Join hands in a spiritual journey that unites India’s diverse faiths — **Hindu, Muslim, Sikh, Jain, Buddhist, Christian**, and more — in a grand celebration of oneness.  
+            Experience the **essence of divine love, peace, and harmony** as we walk this sacred path together.  
+            This project is a tribute to **India’s eternal spirit**, where faiths converge, hearts connect, and souls rise.  
+            Let your spirit be part of this divine awakening — **diverse, sacred, and beautifully united.** 🇮🇳
+
+            💫 **Project Author & Maintainer:**  
+            **Ujjwal Saini** — Creator & Visionary behind Bharat-Bhakti-Yatra  
+            🔗 [GitHub Profile](https://github.com/UjjwalSaini07)  
+            🌐 [Portfolio Website](https://ujjwalsaini.dev)  
+            💌 Connect, collaborate, and contribute to spread unity through devotion.
+
+            ✨ *Together, let’s walk this path of light, unity, and devotion. Jai Bharat!* 🙏
+            `;
 
             // Post comment using GitHub API
             await github.rest.issues.createComment({
               owner,
               repo,
               issue_number,
-              body: message
+              body: message.trim(),
             });
 
       - name: Add Welcome Label
