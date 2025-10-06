@@ -15,8 +15,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#ff7200] via-[#ff8c1a] to-[#ff9a3c] p-4 relative">
-      
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       {/* 🔙 Back Button */}
       <div className="absolute top-6 left-6">
         <Link
