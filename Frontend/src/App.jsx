@@ -1,5 +1,8 @@
 import React from "react";
+import Footer from "./components/common/Footer";
+import Header from "./components/common/Header";
 import "./index.css";
+import Home from "./pages/Home";
 import "./styles/App.scss";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -10,6 +13,7 @@ import { useLocation } from "react-router-dom";
 const App = () => {
     const location = useLocation();
   return (
+ feature-signup
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-orange-500 to-green-700 text-center p-6">
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
@@ -46,6 +50,11 @@ const App = () => {
         <Route path="/login" element={<Login />} />
       </Routes>
       </AnimatePresence>
+    <div className="min-h-screen bg-white">
+      <Header />
+      <Home />
+      <Footer />
+ main
     </div>
   );
 };
