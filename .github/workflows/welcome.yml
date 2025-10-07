@@ -1,77 +1,93 @@
-name: '🌸 Greetings & Spiritual Welcome - Bharat-Bhakti-Yatra'
+name: "🌸 Welcome New Contributors - Bharat-Bhakti-Yatra"
 
 on:
-  push:
-    branches:
-      - main
   issues:
-    types: [opened] # Trigger when a new issue is opened
+    types: [opened]
   pull_request_target:
-    types: [opened] # Trigger when a new PR is opened
+    types: [opened]
 
 jobs:
   welcome:
-    name: 'Welcome New Contributors 🌺'
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Send personalized spiritual welcome messages
-      - name: Send Spiritual Welcome
-        uses: EddieHubCommunity/gh-action-community@v1
+      - name: Post Welcome Message
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Extract context details
+            const { actor, repo: { owner, repo }, issue: { number: issue_number } } = context;
 
-          # Message for newly opened issues
-          issue-message: |
-            🌸 **Namaste @${{ github.actor }}!**
-            Welcome to **Bharat-Bhakti-Yatra**. Thank you for opening a new issue and joining this divine journey of unity and devotion.  
-            🙏 **Your contribution matters:** Each issue helps us create a harmonious spiritual experience that connects hearts and souls across India’s diverse communities—Hindu, Muslim, Sikh, Jain, and more.  
-            🔹 Our team will review your issue and respond promptly. Please provide any additional context to help us improve this sacred journey.  
-            🌺 **Tip:** Label your issue clearly to guide us in addressing it efficiently.  
-            Let’s walk this path of oneness together! ✨
+            // Divine welcome message
+            const message = `
+            🌸 **Namaste @${actor}!**
 
-          # Message for newly opened pull requests
-          pr-message: |
-            🌟 **Blessings, @${{ github.actor }}!**
-            Thank you for contributing to **Bharat-Bhakti-Yatra** through your pull request. Your efforts bring us closer to a shared spiritual and cultural harmony.  
-            🔹 **What happens next:** Our maintainers will review your PR and provide constructive feedback.  
-            🔹 **Best practices:** Include a clear description, reference related issues, and ensure any updates reflect our spiritual and cultural values.  
-            🙏 **Tip:** Every contribution, big or small, helps nurture the spirit of unity in diversity. Keep shining your light!  
-            Together, let’s celebrate India’s sacred diversity and shared devotion. 🌺
+            Welcome to **Bharat-Bhakti-Yatra** — a sacred digital pilgrimage celebrating unity, devotion, and the timeless soul of India.  
+            Thank you for opening a new issue or pull request and becoming part of this divine journey. 🌼
 
-          # Footer message for all contributions
-          footer: |
-            🌸 **Welcome to the Bharat-Bhakti-Yatra community!**  
-            Join hands in a spiritual journey that brings together India’s vibrant communities—Hindu, Muslim, Sikh, Jain, and more—in a celebration of unity and devotion.  
-            📖 Please review our [contributing guidelines](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/CONTRIBUTING.md) to align with our shared values.  
-            🏷️ *Optional:* Add labels like `help wanted` or `good first issue` to guide contributions.  
-            Let your spirit be part of this divine awakening. Thank you for helping us make this journey meaningful and harmonious! 🙏
+            🙏 **Your Contribution Matters:**  
+            Every issue or PR you raise helps shape a harmonious spiritual experience — one that connects hearts across India’s vibrant communities: **Hindu, Muslim, Sikh, Jain, Christian, Buddhist, and beyond.**  
+            Together, we’re crafting a shared space of love, culture, and spiritual growth.
 
-      # Step 3: Add a “welcome” label to new issues/PRs
+            🔹 **Our Process:**  
+            The core team will review your submission soon.  
+            Please provide any additional details or insights to help us make Bharat-Bhakti-Yatra even more inclusive, soulful, and impactful.
+
+            🌺 **Tip:**  
+            Use clear and descriptive labels for your issue or PR to help us manage and prioritize effectively.
+
+            ✨ **About Bharat-Bhakti-Yatra**  
+            Welcome to **Bharat-Bhakti!** 🙏  
+            Join hands in a spiritual journey that unites India’s diverse faiths — **Hindu, Muslim, Sikh, Jain, Buddhist, Christian**, and more — in a grand celebration of oneness.  
+            Experience the **essence of divine love, peace, and harmony** as we walk this sacred path together.  
+            This project is a tribute to **India’s eternal spirit**, where faiths converge, hearts connect, and souls rise.  
+            Let your spirit be part of this divine awakening — **diverse, sacred, and beautifully united.** 🇮🇳
+
+            💫 **Project Author & Maintainer:**  
+            **Ujjwal Saini** — Creator & Visionary behind Bharat-Bhakti-Yatra  
+            🔗 [GitHub Profile](https://github.com/UjjwalSaini07)  
+            🌐 [Portfolio Website](https://ujjwalsaini.dev)  
+            💌 Connect, collaborate, and contribute to spread unity through devotion.
+
+            ✨ *Together, let’s walk this path of light, unity, and devotion. Jai Bharat!* 🙏
+            `;
+
+            // Post comment using GitHub API
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number,
+              body: message.trim(),
+            });
+
       - name: Add Welcome Label
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            if (context.eventName === 'issues' || context.eventName === 'pull_request_target') {
-              const { data: issue } = await github.rest.issues.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+
+            // Fetch existing labels
+            const { data: issue } = await github.rest.issues.get({
+              owner,
+              repo,
+              issue_number
+            });
+
+            const labels = issue.labels.map(label => label.name);
+            if (!labels.includes('welcome')) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number,
+                labels: ['welcome']
               });
-              const labels = issue.labels.map(l => l.name);
-              if (!labels.includes('welcome')) {
-                await github.rest.issues.addLabels({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: context.issue.number,
-                  labels: ['welcome']
-                });
-                console.log(`🏷️ Added 'welcome' label to #${context.issue.number}`);
-              }
+              console.log(`🏷️ Added 'welcome' label to #${issue_number}`);
             } else {
-              console.log('⚠️ Skipped adding label: Not an issue or PR event');
+              console.log(`⚠️ 'welcome' label already exists for #${issue_number}`);
             }
