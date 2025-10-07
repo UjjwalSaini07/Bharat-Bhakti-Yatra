@@ -23,18 +23,32 @@ jobs:
           REPO: ${{ github.repository }}
           COMMENT_BODY: |
             🌟 **Namaste @${{ github.event.pull_request.user.login }}!** 🙏  
-            🎉 Your pull request **#${{ github.event.pull_request.number }} - "${{ github.event.pull_request.title }}"** has been successfully merged into **Bharat-Bhakti-Yatra**! 🥳✨  
-            
-            🌺 **Your contribution brings us closer to a spiritual journey of unity and devotion.**  
-            By enhancing this project, you are helping create a pilgrimage that connects hearts across India’s diverse communities—Hindus, Muslims, Sikhs, Jains, and more—in a celebration of peace, love, and cultural harmony.  
-            
-            🔹 **What’s next:**  
-            - Keep contributing your ideas and code.  
-            - Share feedback to help us improve the spiritual experience.  
-            - Celebrate this moment—you’re making a difference! 🌸  
-            
-            🚀 **Thank you for being a beacon of positivity and collaboration.**  
-            Let your spirit continue to shine in Bharat-Bhakti-Yatra! 🙏🌈
+
+            🎉 Your pull request **#${{ github.event.pull_request.number }} — "${{ github.event.pull_request.title }}"** has been **successfully merged** into **Bharat-Bhakti-Yatra!** 🥳✨  
+
+            🌼 **Congratulations, and thank you for your divine contribution!**  
+            Your effort adds another luminous step in our collective spiritual journey — one that unites **hearts, faiths, and cultures** through the universal message of *devotion and togetherness.*  
+
+            🌺 **What Your Contribution Represents:**  
+            Each line of code you write, each idea you share, becomes part of a digital pilgrimage — where **Hindu, Muslim, Sikh, Jain, Buddhist, Christian, and countless other communities** walk together in harmony.  
+            This is not just development — it’s *digital dharma*, a celebration of India’s timeless unity in diversity. 🇮🇳  
+
+            🔹 **What’s Next:**  
+            - 💡 Continue sharing your ideas, creativity, and vision for this divine platform.  
+            - 🌱 Help refine and expand Bharat-Bhakti-Yatra by contributing new features or improving existing ones.  
+            - 💬 Engage with fellow contributors — inspire and guide them as we grow this sacred community.  
+            - 🌸 Take a moment to reflect — you’ve helped shape something truly meaningful and lasting.  
+
+            🕊️ **A Message from the Core Team:**  
+            Your contribution strengthens the foundation of Bharat-Bhakti-Yatra — a space where *faith meets technology*, and devotion finds expression in code.  
+            Together, we are building not just a project, but a *legacy of spiritual connectivity* for generations to come.  
+
+            🚀 **Thank You for Being a Beacon of Light and Collaboration.**  
+            May your passion, positivity, and creativity continue to illuminate this path of unity and service.  
+
+            ✨ *With deepest gratitude and divine blessings — Jai Bharat! Jai Bhakti!* 🇮🇳  
+            🌈 *Keep shining, and may your code continue to inspire others on this sacred journey.* 🙏
+
         run: |
           echo "Posting celebration comment for PR #$PR_NUMBER by $PR_USER"
 
