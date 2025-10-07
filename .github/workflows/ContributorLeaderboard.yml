@@ -1,4 +1,4 @@
-name: '🌸 Top Contributors Recognition - Bharat-Bhakti-Yatra'
+name: '🚀 Weekly Top Contributors - Bharat-Bhakti-Yatra'
 
 on:
   schedule:
@@ -9,69 +9,87 @@ jobs:
   leaderboard:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch Top Contributors and Post Discussion
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Post Weekly Top Contributors Issue
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            // Fetch contributors
-            const contributors = await github.rest.repos.listContributors({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              per_page: 5
-            });
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
 
-            if (contributors.data.length === 0) {
+            // Fetch top 5 contributors
+            const contributorsResp = await github.rest.repos.listContributors({ owner, repo, per_page: 5 });
+            const contributors = contributorsResp.data;
+            if (!contributors || contributors.length === 0) {
               console.log("No contributors found this week.");
               return;
             }
 
-            // Prepare leaderboard
-            const topContributors = contributors.data.map((c, index) => {
-              let medal = "";
-              if (index === 0) medal = "🥇";
-              else if (index === 1) medal = "🥈";
-              else if (index === 2) medal = "🥉";
-              else medal = "🌟";
-
-              return `${medal} @${c.login} — **${c.contributions} contributions**`;
+            // Generate leaderboard with medals and personalized comments
+            const topContributors = contributors.map((c, index) => {
+              let medal, comment;
+              switch(index){
+                case 0:
+                  medal = "🥇"; comment = "Outstanding contribution! 🌟";
+                  break;
+                case 1:
+                  medal = "🥈"; comment = "Excellent work! ✨";
+                  break;
+                case 2:
+                  medal = "🥉"; comment = "Great effort! 🙏";
+                  break;
+                default:
+                  medal = "🌟"; comment = "Thank you for your contribution! 💖";
+              }
+              return `${medal} @${c.login} — **${c.contributions} contributions** — _${comment}_`;
             }).join("\n");
 
-            // Build appreciation message
-            const body = `
-🌸 **Bharat-Bhakti-Yatra: Top Contributors of the Week** 🌸
+            // Build professional, engaging issue body
+            const body = [
+              "🌸 **Bharat-Bhakti-Yatra: Weekly Top Contributors** 🌸",
+              "",
+              "A huge **thank you** to our amazing contributors who keep this spiritual journey of unity and devotion alive! 🙏",
+              "",
+              topContributors,
+              "",
+              "💡 **Weekly Summary:**",
+              "- Total Commits merged:  " + contributors.reduce((sum, c) => sum + c.contributions, 0),
+              "- Issues resolved:  TBD", // optional: you can fetch issues count if needed
+              "- Notable contributions: bug fixes, documentation improvements, and community engagement 🌱",
+              "",
+              "🎉 **Shoutouts:**",
+              "- Special thanks to contributors who went above and beyond this week 🚀",
+              "- Every contribution, big or small, adds to our vibrant community 🌺",
+              "",
+              "🌟 **Next Steps & Opportunities:**",
+              "- Explore issues labeled `good first issue` or `help wanted` to start contributing",
+              "- Join discussions and share your thoughts on improving our project",
+              "- Help review PRs or provide feedback to support fellow contributors",
+              "",
+              "💖 **Community & Resources:**",
+              "- [Contributing Guidelines](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/CONTRIBUTING.md)",
+              "- [Project Documentation](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/README.md)",
+              "- [Code of Conduct](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/CODE_OF_CONDUCT.md)",
+              "- [Contributing Guidelines](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/CONTRIBUTING.md)",
+              "- Stay connected with us on GitHub Discussions and share your ideas ✨",
+              "",
+              "💖 **Author Details:**",
+              "- **Ujjwal Saini** - [GitHub](https://github.com/UjjwalSaini07)",
+              "- **Author Email** - ujjwalsaini0007+bharatbhakti@gmail.com",
+              "- **Author Portfolio** - [ujjwalsaini.dev](https://ujjwalsaini.dev)",
+              "🌺 Together, let's celebrate unity, collaboration, and devotion. Keep shining and inspiring! 🙏"
+            ].join("\n");
 
-Let's celebrate our amazing contributors who help make this spiritual journey of unity and devotion shine! 🙏
-
-${topContributors}
-
-💖 Your dedication strengthens the project and inspires the community.  
-
-✨ **Keep contributing and spreading positivity!** Every effort counts in this sacred journey.  
-
-_New contributors are always welcome! Explore issues labeled \`good first issue\` or \`help wanted\` to get started._ 🌺
-`;
-
-            // Find a valid discussion category (e.g., "Announcements")
-            const categories = await github.rest.discussions.listCategories({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+            // Create the issue
+            const issue = await github.rest.issues.create({
+              owner,
+              repo,
+              title: "🏆 Weekly Top Contributors",
+              body,
+              labels: ["leaderboard"]
             });
 
-            const category = categories.data.find(c => c.name === "Announcements") || categories.data[0];
-
-            if (!category) {
-              console.log("⚠️ No discussion categories found. Please enable Discussions in your repo.");
-              return;
-            }
-
-            // Create discussion instead of issue
-            await github.rest.discussions.createDiscussion({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              category_id: category.id,
-              title: "🏆 Top Contributors of the Week",
-              body
-            });
-
-            console.log("✅ Top contributors recognition discussion created successfully.");
+            console.log(`✅ Top Contributors issue created successfully: ${issue.data.html_url}`);

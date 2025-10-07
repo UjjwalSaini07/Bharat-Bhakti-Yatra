@@ -1,8 +1,8 @@
-name: '🌸 Auto Celebrate PR Merge - Bharat-Bhakti-Yatra'
+name: "🌺 Auto Celebrate PR Merge - Bharat-Bhakti-Yatra"
 
 on:
   pull_request_target:
-    types: [closed]  # Trigger when a PR is closed
+    types: [closed]
 
 permissions:
   issues: write
@@ -10,47 +10,51 @@ permissions:
 
 jobs:
   celebrate-merge:
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Post Spiritual Merge Celebration
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_USER: ${{ github.event.pull_request.user.login }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          COMMENT_BODY: |
+            🌟 **Namaste @${{ github.event.pull_request.user.login }}!** 🙏  
+            🎉 Your pull request **#${{ github.event.pull_request.number }} - "${{ github.event.pull_request.title }}"** has been successfully merged into **Bharat-Bhakti-Yatra**! 🥳✨  
+            
+            🌺 **Your contribution brings us closer to a spiritual journey of unity and devotion.**  
+            By enhancing this project, you are helping create a pilgrimage that connects hearts across India’s diverse communities—Hindus, Muslims, Sikhs, Jains, and more—in a celebration of peace, love, and cultural harmony.  
+            
+            🔹 **What’s next:**  
+            - Keep contributing your ideas and code.  
+            - Share feedback to help us improve the spiritual experience.  
+            - Celebrate this moment—you’re making a difference! 🌸  
+            
+            🚀 **Thank you for being a beacon of positivity and collaboration.**  
+            Let your spirit continue to shine in Bharat-Bhakti-Yatra! 🙏🌈
         run: |
-          PR_USER="${{ github.event.pull_request.user.login }}"
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          PR_NUMBER="${{ github.event.pull_request.number }}"
-          REPO="${{ github.repository }}"
+          echo "Posting celebration comment for PR #$PR_NUMBER by $PR_USER"
 
-          COMMENT_BODY=$(cat <<EOF
-          🌟 **Namaste @${PR_USER}!** 🙏
-
-          🎉 Your pull request **#${PR_NUMBER} - "${PR_TITLE}"** has been successfully merged into **Bharat-Bhakti-Yatra**! 🥳✨
-
-          🌺 **Your contribution brings us closer to a spiritual journey of unity and devotion.**  
-          By enhancing this project, you are helping create a pilgrimage that connects hearts across India’s diverse communities—Hindus, Muslims, Sikhs, Jains, and more—in a celebration of peace, love, and cultural harmony.  
-
-          🔹 **What’s next:**  
-          - Keep contributing your ideas and code.  
-          - Share feedback to help us improve the spiritual experience.  
-          - Celebrate this moment—you’re making a difference! 🌸
-
-          🚀 **Thank you for being a beacon of positivity and collaboration.**  
-          Let your spirit continue to shine in Bharat-Bhakti-Yatra! 🙏🌈
-EOF
-          )
+          # Build JSON payload safely (prefer jq, otherwise use python)
+          if command -v jq >/dev/null 2>&1; then
+            PAYLOAD=$(jq -n --arg body "$COMMENT_BODY" '{body: $body}')
+          else
+            PAYLOAD=$(printf '%s' "$COMMENT_BODY" | python3 -c 'import sys,json; print(json.dumps({"body": sys.stdin.read()}))')
+          fi
 
           RESPONSE=$(curl -s -o response.json -w "%{http_code}" \
             -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${REPO}/issues/${PR_NUMBER}/comments \
-            -d "{\"body\": \"$COMMENT_BODY\"}")
+            "https://api.github.com/repos/$REPO/issues/$PR_NUMBER/comments" \
+            -d "$PAYLOAD")
 
           cat response.json
           if [ "$RESPONSE" -ne 201 ]; then
-            echo "❌ Failed to post merge celebration comment"
+            echo "❌ Failed to post merge celebration comment (HTTP $RESPONSE)"
             exit 1
           fi
           echo "✅ Merge celebration comment posted successfully"

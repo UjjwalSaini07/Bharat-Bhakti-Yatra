@@ -1,4 +1,4 @@
-name: 'Dependency & Security Scan'
+name: '🌟 Dependency & Security Scan'
 
 on:
   schedule:
@@ -42,22 +42,28 @@ jobs:
             }
 
             const auditOutput = JSON.parse(fs.readFileSync(path, 'utf8'));
-
-            const totalVulns = Object.values(auditOutput.metadata.vulnerabilities)
-              .reduce((sum, val) => sum + val, 0);
+            const vulnerabilities = auditOutput?.metadata?.vulnerabilities || {};
+            const totalVulns = Object.values(vulnerabilities).reduce((sum, val) => sum + val, 0);
 
             if (totalVulns > 0) {
-              const body = `
-              ⚠️ **Security / Dependency Update Required**
+              // Build body safely as an array joined by \n
+              let breakdown = "";
+              for (const [level, count] of Object.entries(vulnerabilities)) {
+                breakdown += `- ${level}: ${count}\n`;
+              }
 
-              Some dependencies have vulnerabilities detected by \`pnpm audit\`.
+              const bodyLines = [
+                "⚠️ **Security / Dependency Update Required**",
+                "",
+                "Some dependencies have vulnerabilities detected by `pnpm audit`.",
+                "",
+                "**Summary:**",
+                `- Total Vulnerabilities: ${totalVulns}`,
+                breakdown,
+                "👉 Please review and update the affected packages."
+              ];
 
-              **Summary:**
-              - Total Vulnerabilities: ${totalVulns}
-              - Breakdown: ${JSON.stringify(auditOutput.metadata.vulnerabilities, null, 2)}
-
-              👉 Please review and update the affected packages.
-              `;
+              const body = bodyLines.join("\n");
 
               await github.rest.issues.create({
                 owner: context.repo.owner,
