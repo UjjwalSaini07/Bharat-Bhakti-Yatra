@@ -4,8 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Discover India's spiritual heritage with Bharat Bhakti Yatra. Interactive maps, guides, and resources help devotees and travelers explore cultural and religious experiences across the country.",
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "UjjwalS <ujjwalsaini0007+bharatbhakti@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra",
@@ -37,6 +36,7 @@
     "@tailwindcss/vite": "^4.1.10",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.23.22",
     "lucide-react": "^0.503.0",
     "postcss": "^8.5.5",
     "react": "^19.1.0",
