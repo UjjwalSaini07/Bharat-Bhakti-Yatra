@@ -23,10 +23,10 @@ jobs:
           version: 8
 
       - name: Install Dependencies
-        run: pnpm install
+        run: cd Frontend && pnpm install
 
       - name: Run Security Audit (JSON output)
-        run: pnpm audit --json > npm_audit.json || true
+        run: cd Frontend && pnpm audit --json > npm_audit.json || true
 
       - name: Create Issue if Vulnerabilities Found
         uses: actions/github-script@v6
@@ -34,7 +34,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
-            const path = 'npm_audit.json';
+            const path = 'Frontend/npm_audit.json'; // ✅ updated path
 
             if (!fs.existsSync(path)) {
               console.log("⚠️ No audit report found. Skipping.");
@@ -46,7 +46,6 @@ jobs:
             const totalVulns = Object.values(vulnerabilities).reduce((sum, val) => sum + val, 0);
 
             if (totalVulns > 0) {
-              // Build body safely as an array joined by \n
               let breakdown = "";
               for (const [level, count] of Object.entries(vulnerabilities)) {
                 breakdown += `- ${level}: ${count}\n`;
