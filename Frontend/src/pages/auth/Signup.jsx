@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Eye, EyeOff, Loader } from "lucide-react";
-import PasswordStrengthMeter from "../components/utils/PasswordStrengthMeter";
-import { useAuthStore } from "../store/authStore";
+import PasswordStrengthMeter from "../../components/utils/PasswordStrengthMeter";
+import { useAuthStore } from "../../store/authStore";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -31,8 +31,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[linear-gradient(120deg,_#f97316_0%,_#16a34a_100%)]
-relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-orange-500 to-green-600 relative overflow-hidden">
       <ToastContainer />
       <div className="w-full max-w-md flex items-start mb-3 mt-16">
         <Link
