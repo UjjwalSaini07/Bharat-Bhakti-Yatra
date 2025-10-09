@@ -8,20 +8,24 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <div className="w-10 h-10 flex items-center justify-center mr-3">
-              <img 
-                width="64" 
-                height="64" 
-                src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/64/external-om-india-icongeek26-linear-colour-icongeek26.png" 
-                alt="external-om-india-icongeek26-linear-colour-icongeek26"
-                className="w-8 h-8 object-contain"
-              />
+          <Link
+            to="/"
+          >
+            <div className="flex items-center">
+              <div className="w-10 h-10 flex items-center justify-center mr-3">
+                <img 
+                  width="64" 
+                  height="64" 
+                  src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/64/external-om-india-icongeek26-linear-colour-icongeek26.png" 
+                  alt="external-om-india-icongeek26-linear-colour-icongeek26"
+                  className="w-8 h-8 object-contain"
+                />
+              </div>
+              <h1 className="text-xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+                Bharat Bhakti Yatra
+              </h1>
             </div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
-              Bharat Bhakti Yatra
-            </h1>
-          </div>
+          </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Home</a>
