@@ -34,6 +34,7 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.10",
     "@tailwindcss/vite": "^4.1.10",
+    "axios": "^1.12.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.22",
@@ -42,9 +43,11 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2",
+    "react-toastify": "^11.0.5",
     "sass": "^1.89.2",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.10"
+    "tailwindcss": "^4.1.10",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
