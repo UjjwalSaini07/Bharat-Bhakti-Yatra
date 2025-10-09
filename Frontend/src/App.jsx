@@ -3,8 +3,8 @@ import Header from "./components/common/Header";
 import "./index.css";
 import Home from "./pages/Home";
 import "./styles/App.scss";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
 
 import { Routes, Route, Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
