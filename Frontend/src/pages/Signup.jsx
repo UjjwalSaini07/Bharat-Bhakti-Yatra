@@ -1,24 +1,40 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, Loader } from "lucide-react";
+import PasswordStrengthMeter from "../components/utils/PasswordStrengthMeter";
+import { useAuthStore } from "../store/authStore";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const { signup, error, isLoading } = useAuthStore();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      await signup(formData.email, formData.password, formData.fullName);
+      toast.success("Account created successfully! Please verify your email.");
+      navigate("/verify-email");
+    } catch (err) {
+      toast.error(err.message || "Failed to create account. Please try again.");
+      console.error(err);
+    }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-orange-500 to-green-600 relative overflow-hidden">
-
-      <div className="w-full max-w-md flex items-start mb-3">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[linear-gradient(120deg,_#f97316_0%,_#16a34a_100%)]
+relative overflow-hidden">
+      <ToastContainer />
+      <div className="w-full max-w-md flex items-start mb-3 mt-16">
         <Link
           to="/"
           className="flex items-center gap-2 text-white font-medium hover:underline transition group"
@@ -50,6 +66,7 @@ const Signup = () => {
               type="text"
               name="fullName"
               placeholder="Enter your name"
+              value={formData.fullName}
               onChange={handleChange}
               required
               className="w-full bg-white/80 border border-transparent focus:border-[#ff7200] p-3 rounded-lg outline-none transition focus:ring-2 focus:ring-[#ff7200]"
@@ -62,30 +79,45 @@ const Signup = () => {
               type="email"
               name="email"
               placeholder="you@example.com"
+              value={formData.email}
               onChange={handleChange}
               required
               className="w-full bg-white/80 border border-transparent focus:border-[#ff7200] p-3 rounded-lg outline-none transition focus:ring-2 focus:ring-[#ff7200]"
             />
           </div>
 
-          <div>
+          <div className="relative">
             <label className="block text-white font-medium mb-1 text-sm">Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="********"
+              value={formData.password}
               onChange={handleChange}
               required
               className="w-full bg-white/80 border border-transparent focus:border-[#ff7200] p-3 rounded-lg outline-none transition focus:ring-2 focus:ring-[#ff7200]"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-4 mt-5 flex items-center text-gray-800 hover:text-gray-600 focus:outline-none"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
           </div>
+
+          <PasswordStrengthMeter password={formData.password} />
+
+          {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
 
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             type="submit"
-            className="w-full bg-[#ff7200] hover:bg-[#ff8c1a] text-white font-semibold py-3 rounded-lg shadow-xl transition"
+            disabled={isLoading}
+            className="w-full bg-[#ff7200] hover:bg-[#ff8c1a] text-white font-semibold py-3 rounded-lg shadow-xl transition flex items-center justify-center gap-2"
           >
+            {isLoading && <Loader className="animate-spin" size={20} />}
             Sign Up
           </motion.button>
         </form>
