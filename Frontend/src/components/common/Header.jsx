@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,9 +37,20 @@ const Header = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>
-            <button className="bg-gradient-to-r from-orange-500 to-amber-600 text-white px-6 py-2 rounded-full hover:from-orange-600 hover:to-amber-700 transition-all transform hover:scale-105 font-medium">
-              Join Now
-            </button>
+            <div className="flex justify-center gap-4">
+                <Link
+                  to="/signup"
+                  className="px-6 py-2 bg-orange-500 text-white font-semibold rounded-lg shadow hover:bg-orange-600 transition"
+                >
+                  Signup
+                </Link>
+                <Link
+                  to="/login"
+                  className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition"
+                >
+                  Login
+                </Link>
+              </div>
           </div>
 
           <button 
