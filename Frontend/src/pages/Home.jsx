@@ -4,6 +4,7 @@ import FeatureCards from '../components/sections/FeatureCards';
 import HeroSection from '../components/sections/HeroSection';
 import SacredRitualsSection from '../components/sections/SacredRitualsSection';
 import SacredVideosSection from '../components/sections/SacredVideosSection';
+import Footer from "../components/common/Footer";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <SacredRitualsSection />
       <SacredVideosSection />
       <CommunitySection />
+      <Footer />
     </main>
   );
 };
