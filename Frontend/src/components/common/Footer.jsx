@@ -26,10 +26,10 @@ const Footer = () => {
             <div className="mb-4">
               <p className="text-sm text-gray-600 mb-1">Address:</p>
               <p className="text-sm text-gray-800">
-                ansjkdjakd ajskdajs ajskdna , asd
+              123 Temple Road, Connaught Place
               </p>
               <p className="text-sm text-gray-800">
-                A, New Delhi, Delhi 111111
+                New Delhi, Delhi 110001
               </p>
             </div>
             <div className="flex justify-start mb-1">
