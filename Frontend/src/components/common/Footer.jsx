@@ -6,7 +6,6 @@ const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
   return (
     <footer className="bg-white border-t border-gray-200 text-gray-700 relative">
       <div className="max-w-7xl mx-auto px-6 py-12">
