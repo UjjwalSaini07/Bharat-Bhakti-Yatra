@@ -23,8 +23,8 @@ const Header = () => {
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Home</a>
-            <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Pujas</a>
+            <a href="/" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Home</a>
+            <a href="/pujas" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Pujas</a>
             <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Chatdhara</a>
             <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Astrology</a>
             <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Kundli</a>
@@ -58,8 +58,8 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-100">
             <div className="flex flex-col space-y-4">
-              <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Home</a>
-              <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Pujas</a>
+              <a href="/" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Home</a>
+              <a href="/pujas" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Pujas</a>
               <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Chatdhara</a>
               <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Astrology</a>
               <a href="#" className="text-gray-700 hover:text-orange-500 transition-colors font-medium">Kundli</a>
