@@ -33,11 +33,11 @@ const Footer = () => {
                 A, New Delhi, Delhi 111111
               </p>
             </div>
-            <div className="mb-4">
+            <div className="flex justify-start mb-1">
               <p className="text-sm text-gray-600 mb-1">Tel:</p>
               <p className="text-sm text-gray-800">+91 9999999999</p>
             </div>
-            <div>
+            <div className="flex justify-start">
               <p className="text-sm text-gray-600 mb-1">Email:</p>
               <p className="text-sm text-gray-800">xyz@outlook.com</p>
             </div>
