@@ -159,7 +159,7 @@ const Footer = () => {
               <span className="text-sm">Join Our WhatsApp Community</span>
             </a>
           </div>
-
+          
           {/* Copyright */}
           <p className="text-sm text-gray-500">
             © 2025 Bharat Bhakti Yatra. All Rights Reserved.
