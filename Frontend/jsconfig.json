@@ -5,7 +5,7 @@
     "allowJs": true,
     "checkJs": false,
     "jsx": "react",
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "paths": {
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"]
