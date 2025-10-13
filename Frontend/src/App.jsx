@@ -3,6 +3,7 @@ import Header from "./components/common/Header";
 import "./index.css";
 import { useAuthStore } from "./store/authStore";
 import Home from "./pages/Home";
+import Userprofile from "./components/users/userProfile";
 import "./styles/App.scss";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
@@ -20,13 +21,14 @@ const App = () => {
   useEffect(() => {
     checkAuth();
   }, []);
-  
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Userprofile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify-email" element={<EmailVerificationPage />} />
