@@ -39,6 +39,7 @@
     "axios": "^1.12.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "firebase": "^12.4.0",
     "framer-motion": "^12.23.22",
     "lucide-react": "^0.503.0",
     "postcss": "^8.5.5",
