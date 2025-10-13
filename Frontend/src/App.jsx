@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import "./styles/App.scss";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Pujas from './pages/Pujas';
+import Pujas from './components/Pujas';
 
 import { Routes, Route, Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";

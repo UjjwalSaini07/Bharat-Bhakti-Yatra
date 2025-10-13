@@ -1,29 +1,11 @@
 import React, { useState } from 'react';
 import { Search, Calendar, MapPin, Star, Clock, Users, Heart, Filter, ChevronRight, Sparkles, BookOpen, Shield, Flame, Award, TrendingUp, Gift, Flower2 } from 'lucide-react';
 
-interface Puja {
-  id: number;
-  name: string;
-  category: string;
-  description: string;
-  fullDescription: string;
-  duration: string;
-  price: number;
-  rating: number;
-  reviews: number;
-  image: string;
-  popular: boolean;
-  deity: string;
-  benefits: string[];
-  ritualDetails: string;
-  materials: string[];
-}
-
 const Pujas = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [favorites, setFavorites] = useState<number[]>([]);
-  const [expandedPuja, setExpandedPuja] = useState<number | null>(null);
+  const [favorites, setFavorites] = useState([]);
+  const [expandedPuja, setExpandedPuja] = useState(null);
 
   const categories = [
     'All',
@@ -35,7 +17,7 @@ const Pujas = () => {
     'Health & Wellness'
   ];
 
-  const pujas: Puja[] = [
+  const pujas = [
     {
       id: 1,
       name: 'Maha Mrityunjaya Jaap',
@@ -199,7 +181,7 @@ const Pujas = () => {
     return matchesCategory && matchesSearch;
   });
 
-  const toggleFavorite = (id: number) => {
+  const toggleFavorite = (id) => {
     setFavorites(prev =>
       prev.includes(id) ? prev.filter(fav => fav !== id) : [...prev, id]
     );
@@ -209,7 +191,7 @@ const Pujas = () => {
     <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-amber-50">
       {/* Top Main Hero Section with Full Screen Background */}
       <div className="relative overflow-hidden min-h-screen flex items-center pt-20">
-                {/* Background Image Container */}
+        {/* Background Image Container */}
         <div className="absolute inset-0">
           <img 
             src="https://m.media-amazon.com/images/I/81PS6h7bS8L._UF894,1000_QL80_.jpg" 
@@ -456,7 +438,7 @@ const Pujas = () => {
 
         {/* Bottom Consultation Section with Rounded Container */}
         <div className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-amber-500 to-orange-600 rounded-3xl p-12 text-white text-center mb-16 shadow-2xl">
-                    {/* Background Image Container */}
+          {/* Background Image Container */}
           <div className="absolute inset-0">
             <img 
               src="https://m.media-amazon.com/images/I/81PS6h7bS8L._UF894,1000_QL80_.jpg" 
