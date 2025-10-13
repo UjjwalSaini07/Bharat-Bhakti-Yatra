@@ -7,12 +7,19 @@ import { useAuthStore } from "../../store/authStore";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import FireBaseConfig from "../../components/firebase/firebaseConfig";
+
 const Signup = () => {
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const { signup, error, isLoading } = useAuthStore();
+
+  const auth = getAuth(FireBaseConfig);
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,6 +33,28 @@ const Signup = () => {
       navigate("/verify-email");
     } catch (err) {
       toast.error(err.message || "Failed to create account. Please try again.");
+      console.error(err);
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      toast.success(`Signed up as ${result.user.displayName}`);
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message || "Google signup failed.");
+      console.error(err);
+    }
+  };
+
+  const handleGithubSignup = async () => {
+    try {
+      const result = await signInWithPopup(auth, githubProvider);
+      toast.success(`Signed up as ${result.user.displayName}`);
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message || "GitHub signup failed.");
       console.error(err);
     }
   };
@@ -119,6 +148,25 @@ const Signup = () => {
             {isLoading && <Loader className="animate-spin" size={20} />}
             Sign Up
           </motion.button>
+
+          <div className="flex justify-between mt-3 gap-3">
+            <button
+              type="button"
+              onClick={handleGoogleSignup}
+              className="w-1/2 bg-white text-gray-800 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition flex items-center justify-center gap-2"
+            >
+              <img src="/assets/authIcons/google.png" alt="Google" className="w-5 h-5" />
+              Google
+            </button>
+            <button
+              type="button"
+              onClick={handleGithubSignup}
+              className="w-1/2 bg-white text-gray-800 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition flex items-center justify-center gap-2"
+            >
+              <img src="/assets/authIcons/github.png" alt="GitHub" className="w-5 h-5" />
+              GitHub
+            </button>
+          </div>
         </form>
 
         <p className="text-center text-white/90 text-sm mt-5">

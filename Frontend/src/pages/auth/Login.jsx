@@ -6,12 +6,19 @@ import { useAuthStore } from "../../store/authStore";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import FireBaseConfig from "../../components/firebase/firebaseConfig";
+
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const { login, isLoading, error } = useAuthStore();
+
+  const auth = getAuth(FireBaseConfig);
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,6 +32,28 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       toast.error(err.message || "Failed to log in. Please try again.");
+      console.error(err);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      toast.success(`Logged in as ${result.user.displayName}`);
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message || "Google login failed.");
+      console.error(err);
+    }
+  };
+
+  const handleGithubLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, githubProvider);
+      toast.success(`Logged in as ${result.user.displayName}`);
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message || "GitHub login failed.");
       console.error(err);
     }
   };
@@ -104,6 +133,25 @@ const Login = () => {
             {isLoading && <Loader className="animate-spin" size={20} />}
             Login
           </motion.button>
+
+          <div className="flex justify-between mt-3 gap-3">
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="w-1/2 bg-white text-gray-800 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition flex items-center justify-center gap-2"
+            >
+              <img src="/assets/authIcons/google.png" alt="Google" className="w-5 h-5" />
+              Google
+            </button>
+            <button
+              type="button"
+              onClick={handleGithubLogin}
+              className="w-1/2 bg-white text-gray-800 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition flex items-center justify-center gap-2"
+            >
+              <img src="/assets/authIcons/github.png" alt="GitHub" className="w-5 h-5" />
+              GitHub
+            </button>
+          </div>
 
           <div className="flex justify-end mt-1">
             <Link to="/forgot-password" className="text-white/80 text-sm hover:underline">
