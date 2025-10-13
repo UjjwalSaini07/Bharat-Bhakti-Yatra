@@ -1,16 +1,37 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import FireBaseConfig from "../../components/firebase/firebaseConfig";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [firebaseUser, setFirebaseUser] = useState(null);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
   const { user, isAuthenticated, logout } = useAuthStore();
-  const handleLogout = () => {
-    logout();
+
+  const auth = getAuth(FireBaseConfig);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setFirebaseUser(user);
+    });
+    return () => unsubscribe();
+  }, [auth]);
+
+  const handleLogout = async () => {
+    // Logout from backend auth store
+    if (isAuthenticated) {
+      logout();
+    }
+    // Logout from Firebase OAuth if logged in
+    if (firebaseUser) {
+      await signOut(auth);
+      setFirebaseUser(null);
+    }
     navigate("/");
   };
 
@@ -25,6 +46,14 @@ const Header = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const displayName =
+    user?.name ||
+    firebaseUser?.displayName ||
+    firebaseUser?.email?.split("@")[0] ||
+    "U";
+
+  const isAnyAuthenticated = isAuthenticated || !!firebaseUser;
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
@@ -61,16 +90,17 @@ const Header = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>
-            {isAuthenticated ? (
+
+            {isAnyAuthenticated ? (
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full hover:bg-gray-200 transition"
                 >
                   <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold">
-                    {user?.name?.charAt(0).toUpperCase() || "U"}
+                    {displayName.charAt(0).toUpperCase()}
                   </div>
-                  <span className="font-medium">{user?.name}</span>
+                  <span className="font-medium">{displayName}</span>
                   <svg
                     className={`w-4 h-4 opacity-70 transform transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : "rotate-0"}`}
                     fill="none"
@@ -120,7 +150,7 @@ const Header = () => {
             <a href="#" className="block text-gray-700 hover:text-orange-500 font-medium">Astrology</a>
             <a href="#" className="block text-gray-700 hover:text-orange-500 font-medium">Kundli</a>
 
-            {isAuthenticated ? (
+            {isAnyAuthenticated ? (
               <>
                 <Link to="/profile" className="block py-2">My Profile</Link>
                 <button
