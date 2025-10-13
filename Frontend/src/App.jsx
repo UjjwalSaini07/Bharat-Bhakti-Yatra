@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./components/common/Header";
 import "./index.css";
+import { useAuthStore } from "./store/authStore";
 import Home from "./pages/Home";
 import "./styles/App.scss";
 import Login from "./pages/auth/Login";
@@ -14,6 +15,12 @@ import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
 const App = () => {
+  const { checkAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+  
   return (
     <div className="min-h-screen bg-white">
       <Header />
