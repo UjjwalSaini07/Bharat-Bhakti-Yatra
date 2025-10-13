@@ -1,13 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   const { user, isAuthenticated, logout } = useAuthStore();
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -81,7 +86,7 @@ const Header = () => {
                     <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">👤 My Profile</Link>
                     <Link to="/terms" className="block px-4 py-2 hover:bg-gray-100">Terms & Conditions</Link>
                     <Link to="/privacy" className="block px-4 py-2 hover:bg-gray-100">Privacy Policy</Link>
-                    <button onClick={logout} className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50">Logout</button>
+                    <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50">Logout</button>
                   </div>
                 )}
               </div>
@@ -119,7 +124,7 @@ const Header = () => {
               <>
                 <Link to="/profile" className="block py-2">My Profile</Link>
                 <button
-                  onClick={logout}
+                  onClick={handleLogout}
                   className="w-full bg-red-500 text-white px-6 py-2 rounded-lg shadow hover:bg-red-600 mt-2"
                 >
                   🚪 Logout
