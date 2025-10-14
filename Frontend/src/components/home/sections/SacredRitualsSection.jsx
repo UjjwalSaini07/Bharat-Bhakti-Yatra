@@ -5,23 +5,22 @@ const SacredRitualsSection = () => {
     {
       title: "Morning Aarti",
       description: "Start your day with divine blessings",
-      image: "/assets/aarti.jpg"
+      image: "/assets/hinduism/home/aarti.jpg"
     },
     {
       title: "Evening Prayers", 
       description: "Find peace in sacred evening rituals",
-      image: "/assets/prayer.jpg"
+      image: "/assets/hinduism/home/prayer.jpg"
     },
     {
       title: "Festival Celebrations",
       description: "Join community celebrations and festivals", 
-      image: "/assets/festival.jpg"
+      image: "/assets/hinduism/home/festival.jpg"
     }
   ];
 
   return (
     <section className="relative py-20 bg-white overflow-hidden">
-      {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-gradient-to-br from-orange-300/20 to-amber-400/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-tl from-orange-400/15 to-amber-500/15 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
@@ -40,7 +39,6 @@ const SacredRitualsSection = () => {
           {rituals.map((ritual, index) => (
             <div key={index} className="group cursor-pointer">
               <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-500 hover:scale-105">
-                {/* Orange glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-amber-600/0 group-hover:from-orange-500/20 group-hover:to-amber-600/20 transition-all duration-500 z-10"></div>
                 <img 
                   src={ritual.image} 

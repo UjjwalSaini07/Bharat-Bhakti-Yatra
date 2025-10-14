@@ -6,25 +6,24 @@ const SacredVideosSection = () => {
       title: "Mahaarti Ganga Aarti",
       description: "Experience the divine evening aarti at River Ganga",
       videoId: "NVVJJKOtzAM",
-      thumbnail: "/assets/aarti.jpg"
+      thumbnail: "/assets/hinduism/home/aarti.jpg"
     },
     {
       title: "Shri Krishna Janmashtami",
       description: "Celebrate the birth of Lord Krishna with devotional songs",
       videoId: "J5Ek8rIErsQ",
-      thumbnail: "/assets/festival.jpg"
+      thumbnail: "/assets/hinduism/home/festival.jpg"
     },
     {
       title: "Ganga Dussehra Ghazipur",
       description: "Witness the grand Ganga Dussehra celebrations",
       videoId: "DfEcL29mE0I",
-      thumbnail: "/assets/prayer.jpg"
+      thumbnail: "/assets/hinduism/home/prayer.jpg"
     }
   ];
 
   return (
     <section className="relative py-20 bg-gradient-to-br from-gray-50 to-orange-50 overflow-hidden">
-      {/* Floating Orange Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-orange-400/30 to-amber-500/30 rounded-full blur-2xl animate-bounce" style={{animationDuration: '3s'}}></div>
         <div className="absolute top-40 right-16 w-24 h-24 bg-gradient-to-tl from-orange-500/25 to-amber-600/25 rounded-full blur-xl animate-bounce" style={{animationDuration: '4s', animationDelay: '1s'}}></div>
@@ -44,7 +43,7 @@ const SacredVideosSection = () => {
           {videos.map((video, index) => (
             <div key={index} className="group">
               <div className="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:shadow-orange-500/25">
-                {/* Orange border glow */}
+                
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-400/0 via-transparent to-amber-600/0 group-hover:from-orange-400/30 group-hover:to-amber-600/30 rounded-xl transition-all duration-500 blur-sm"></div>
                 <div className="relative aspect-video">
                   <iframe
@@ -69,7 +68,6 @@ const SacredVideosSection = () => {
           ))}
         </div>
         
-        {/* Call to action */}
         <div className="text-center mt-12">
           <button className="bg-gradient-to-r from-orange-500 to-amber-600 text-white px-8 py-3 rounded-full font-semibold hover:from-orange-600 hover:to-amber-700 transition-all transform hover:scale-105 shadow-lg">
             View More Videos

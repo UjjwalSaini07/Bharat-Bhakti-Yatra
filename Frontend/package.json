@@ -32,10 +32,14 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/postcss": "^4.1.10",
     "@tailwindcss/vite": "^4.1.10",
+    "axios": "^1.12.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "firebase": "^12.4.0",
     "framer-motion": "^12.23.22",
     "lucide-react": "^0.503.0",
     "postcss": "^8.5.5",
@@ -43,9 +47,11 @@
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.2",
+    "react-toastify": "^11.0.5",
     "sass": "^1.89.2",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.10"
+    "tailwindcss": "^4.1.10",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

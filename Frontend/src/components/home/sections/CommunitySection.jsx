@@ -3,10 +3,9 @@ import React from 'react';
 const CommunitySection = () => {
   return (
     <section className="relative py-20 overflow-hidden">
-      {/* Background with temple image */}
       <div className="absolute inset-0">
         <img 
-          src="/assets/image temple bg.jpg" 
+          src="/assets/hinduism/home/image_temple_bg.jpg" 
           alt="Temple Background" 
           className="w-full h-full object-cover opacity-20"
         />

@@ -27,12 +27,12 @@
     "url": "https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/issues"
   },
   "type": "module",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -r dotenv/config --experimental-json-modules server.js",
+    "dev": "nodemon -r dotenv/config --experimental-json-modules index.js",
     "build": "echo 'No build step needed for plain JS'",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
