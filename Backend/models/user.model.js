@@ -31,4 +31,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const User = mongoose.model("UserAuthGuard", userSchema);
+export const User = mongoose.model("userbharatbhakti", userSchema);
