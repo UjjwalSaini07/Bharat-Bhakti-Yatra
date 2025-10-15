@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Header from "./components/common/Header";
-import Footer from "./components/common/Footer";
 import "./index.css";
 import { useAuthStore } from "./store/authStore";
 import Home from "./pages/Home";
@@ -8,10 +7,10 @@ import Userprofile from "./components/users/userProfile";
 import "./styles/App.scss";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
-import Pujas from './components/Pujas';
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import EmailVerificationPage from "./pages/auth/EmailVerificationPage";
+import Pujas from './components/Pujas';
 
 import { Routes, Route, Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -24,68 +23,26 @@ const App = () => {
     checkAuth();
   }, []);
 
-  const location = useLocation();
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
-
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          {/* Home & Landing Section */}
-          <Route
-            path="/"
-            element={
-              <div>
-                <Home />
-                <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-orange-500 to-green-700 text-center p-6">
-                  <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-2xl">
-                    <h1 className="text-5xl font-extrabold text-gray-800 mb-6">
-                      Welcome to{" "}
-                      <span className="text-orange-500">Bharat Bhakti Yatra</span>
-                    </h1>
-                    <p className="text-lg text-gray-600 mb-6">
-                      Uniting India's diverse communities through devotion, peace, and
-                      cultural harmony.
-                    </p>
-                    <div className="flex justify-center gap-4">
-                      <Link
-                        to="/signup"
-                        className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow hover:bg-orange-600 transition"
-                      >
-                        Signup
-                      </Link>
-                      <Link
-                        to="/login"
-                        className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition"
-                      >
-                        Login
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            }
-          />
-
-          {/* Auth & User Routes */}
-          <Route path="/profile" element={<Userprofile />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/verify-email" element={<EmailVerificationPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-          <Route path="/pujas" element={<Pujas />} />
-        </Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Userprofile />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/verify-email" element={<EmailVerificationPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+        <Route path="/pujas" element={<Pujas />} />
+      </Routes>
       </AnimatePresence>
-
-      <Footer />
     </div>
   );
 };
 
 export default App;
-
 
 // Todo: Working Protected Routes
 // import React, { useEffect } from "react";
