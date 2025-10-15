@@ -158,7 +158,7 @@ export default function BlogWrapper() {
                         Bharat Bhakti Yatra Blog
 
                     </h2>
-                    <p className="text-lg text-gray-400 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+                    <p className="text-md text-gray-500 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
                         Embark on a spiritual journey that connects devotees across the digital realm,
                         fostering unity and devotion in our sacred traditions.
                     </p>
@@ -174,7 +174,7 @@ export default function BlogWrapper() {
                             placeholder="Search sacred stories..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition shadow-sm"
+                            className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition "
                         />
                     </div>
 
@@ -258,7 +258,7 @@ export default function BlogWrapper() {
                                     <Button
                                         variant="ghost"
                                         className="group/btn p-0 px-3 py-3 rounded-full font-semibold 
-             bg-gradient-to-r from-orange-500 via-orange-500 to-rose-500 
+             bg-gradient-to-r from-orange-500 via-orange-500 to-rose-500 cursor-pointer
              text-white shadow-md transition-all duration-300 
              hover:shadow-lg hover:scale-105 
              hover:from-rose-500 hover:via-orange-500 hover:to-yellow-500 hover:text-white"
