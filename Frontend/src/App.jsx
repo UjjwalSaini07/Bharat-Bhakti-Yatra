@@ -10,6 +10,7 @@ import Signup from "./pages/auth/Signup";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import EmailVerificationPage from "./pages/auth/EmailVerificationPage";
+import Pujas from './components/Pujas';
 
 import { Routes, Route, Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/verify-email" element={<EmailVerificationPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+        <Route path="/pujas" element={<Pujas />} />
       </Routes>
       </AnimatePresence>
     </div>

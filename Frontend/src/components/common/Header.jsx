@@ -12,7 +12,6 @@ const Header = () => {
   const navigate = useNavigate();
 
   const { user, isAuthenticated, logout } = useAuthStore();
-
   const auth = getAuth(FireBaseConfig);
 
   useEffect(() => {
@@ -23,11 +22,7 @@ const Header = () => {
   }, [auth]);
 
   const handleLogout = async () => {
-    // Logout from backend auth store
-    if (isAuthenticated) {
-      logout();
-    }
-    // Logout from Firebase OAuth if logged in
+    if (isAuthenticated) logout();
     if (firebaseUser) {
       await signOut(auth);
       setFirebaseUser(null);
@@ -36,61 +31,63 @@ const Header = () => {
   };
 
   useEffect(() => {
-    function handleClickOutside(event) {
+    const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
       }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
     };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const displayName =
-    user?.name ||
-    firebaseUser?.displayName ||
-    firebaseUser?.email?.split("@")[0] ||
-    "U";
+    user?.name || firebaseUser?.displayName || firebaseUser?.email?.split("@")[0] || "U";
 
   const isAnyAuthenticated = isAuthenticated || !!firebaseUser;
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Pujas", path: "/pujas" },
+    { name: "Chatdhara", path: "#" },
+    { name: "Astrology", path: "#" },
+    { name: "Kundli", path: "#" },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/">
-            <div className="flex items-center">
-              <div className="w-10 h-10 flex items-center justify-center mr-3">
-                <img
-                  width="64"
-                  height="64"
-                  src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/64/external-om-india-icongeek26-linear-colour-icongeek26.png"
-                  alt="logo"
-                  className="w-8 h-8 object-contain"
-                />
-              </div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
-                Bharat Bhakti Yatra
-              </h1>
+          {/* Logo */}
+          <Link to="/" className="flex items-center">
+            <div className="w-10 h-10 flex items-center justify-center mr-3">
+              <img
+                width="64"
+                height="64"
+                src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/64/external-om-india-icongeek26-linear-colour-icongeek26.png"
+                alt="logo"
+                className="w-8 h-8 object-contain"
+              />
             </div>
+            <h1 className="text-xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+              Bharat Bhakti Yatra
+            </h1>
           </Link>
 
+          {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-gray-700 hover:text-orange-500 font-medium">Home</a>
-            <a href="#" className="text-gray-700 hover:text-orange-500 font-medium">Pujas</a>
-            <a href="#" className="text-gray-700 hover:text-orange-500 font-medium">Chatdhara</a>
-            <a href="#" className="text-gray-700 hover:text-orange-500 font-medium">Astrology</a>
-            <a href="#" className="text-gray-700 hover:text-orange-500 font-medium">Kundli</a>
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className="text-gray-700 hover:text-orange-500 font-medium transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
           </nav>
 
+          {/* Auth / Profile Desktop */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="text-gray-700 hover:text-orange-500 transition-colors p-2 rounded-full hover:bg-orange-50">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-
             {isAnyAuthenticated ? (
               <div className="relative" ref={dropdownRef}>
                 <button
@@ -102,7 +99,9 @@ const Header = () => {
                   </div>
                   <span className="font-medium">{displayName}</span>
                   <svg
-                    className={`w-4 h-4 opacity-70 transform transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : "rotate-0"}`}
+                    className={`w-4 h-4 opacity-70 transform transition-transform duration-200 ${
+                      isDropdownOpen ? "rotate-180" : "rotate-0"
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -113,21 +112,43 @@ const Header = () => {
 
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-xl shadow-lg animate-fadeIn">
-                    <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">👤 My Profile</Link>
-                    <Link to="/terms" className="block px-4 py-2 hover:bg-gray-100">Terms & Conditions</Link>
-                    <Link to="/privacy" className="block px-4 py-2 hover:bg-gray-100">Privacy Policy</Link>
-                    <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50">Logout</button>
+                    <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
+                      👤 My Profile
+                    </Link>
+                    <Link to="/terms" className="block px-4 py-2 hover:bg-gray-100">
+                      Terms & Conditions
+                    </Link>
+                    <Link to="/privacy" className="block px-4 py-2 hover:bg-gray-100">
+                      Privacy Policy
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
+                    >
+                      Logout
+                    </button>
                   </div>
                 )}
               </div>
             ) : (
               <>
-                <Link to="/login" className="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">Login</Link>
-                <Link to="/signup" className="px-6 py-2 bg-orange-500 text-white rounded-lg shadow hover:bg-orange-600 transition">Signup</Link>
+                <Link
+                  to="/login"
+                  className="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="px-6 py-2 bg-orange-500 text-white rounded-lg shadow hover:bg-orange-600 transition"
+                >
+                  Signup
+                </Link>
               </>
             )}
           </div>
 
+          {/* Mobile Menu Toggle */}
           <button
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -142,17 +163,24 @@ const Header = () => {
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 w-full bg-white/90 backdrop-blur-lg shadow-lg animate-slideDown p-4 space-y-3">
-            <a href="#" className="block text-gray-700 hover:text-orange-500 font-medium">Home</a>
-            <a href="#" className="block text-gray-700 hover:text-orange-500 font-medium">Pujas</a>
-            <a href="#" className="block text-gray-700 hover:text-orange-500 font-medium">Chatdhara</a>
-            <a href="#" className="block text-gray-700 hover:text-orange-500 font-medium">Astrology</a>
-            <a href="#" className="block text-gray-700 hover:text-orange-500 font-medium">Kundli</a>
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className="block text-gray-700 hover:text-orange-500 font-medium"
+              >
+                {link.name}
+              </Link>
+            ))}
 
             {isAnyAuthenticated ? (
               <>
-                <Link to="/profile" className="block py-2">My Profile</Link>
+                <Link to="/profile" className="block py-2">
+                  My Profile
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="w-full bg-red-500 text-white px-6 py-2 rounded-lg shadow hover:bg-red-600 mt-2"
@@ -162,10 +190,20 @@ const Header = () => {
               </>
             ) : (
               <div className="flex gap-3">
-                <Link to="/login" className="flex-1 bg-green-600 text-white py-2 rounded-lg text-center">Login</Link>
-                <Link to="/signup" className="flex-1 bg-orange-500 text-white py-2 rounded-lg text-center">Signup</Link>
+                <Link to="/login" className="flex-1 bg-green-600 text-white py-2 rounded-lg text-center">
+                  Login
+                </Link>
+                <Link to="/signup" className="flex-1 bg-orange-500 text-white py-2 rounded-lg text-center">
+                  Signup
+                </Link>
               </div>
             )}
+
+            <div className="py-4 border-t border-gray-100">
+              <button className="bg-gradient-to-r from-orange-500 to-amber-600 text-white px-6 py-2 rounded-full hover:from-orange-600 hover:to-amber-700 transition-all font-medium w-full">
+                Join Now
+              </button>
+            </div>
           </div>
         )}
       </div>
