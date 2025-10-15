@@ -15,6 +15,7 @@ import Pujas from './components/Pujas';
 import { Routes, Route, Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import BlogWrapper from "./components/blog/BlogWrapper";
 
 const App = () => {
   const { checkAuth } = useAuthStore();
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
         <Route path="/pujas" element={<Pujas />} />
+        <Route path="/blog" element={<BlogWrapper/>} />
       </Routes>
       </AnimatePresence>
     </div>
