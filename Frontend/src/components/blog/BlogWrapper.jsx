@@ -270,7 +270,7 @@ export default function BlogWrapper() {
                                     </Button>
                                     <ArrowRight
                                         size={16}
-                                        className="rounded-full border h-8 w-8 p-2"
+                                        className="rounded-full border h-8 w-8 p-2 cursor-pointer hover:border-orange-500 hover:shadow-sm"
                                     />
                                 </div>
                             </div>
