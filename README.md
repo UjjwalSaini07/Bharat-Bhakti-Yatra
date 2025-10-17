@@ -134,6 +134,93 @@ You can visit the live site here : [WebLink](https://bharatbhakti-yatra.vercel.a
 
 - Open your browser and navigate to http://localhost:5173 to view the localhost website
 
+## 🤝 Contributing to Bharat Bhakti Yatra
+
+Thank you for your interest in contributing to **Bharat Bhakti Yatra**! This project is community-driven, and we truly appreciate every contribution that helps enhance the platform.
+
+### ✅ Contribution Workflow
+
+#### 🔍 1. Pick or Propose an Issue
+- Explore the **Issues** tab and select any unassigned task.
+- To suggest a feature or improvement, open a new issue.
+- **Wait for admin approval** before you begin working to avoid duplicate efforts.
+
+### 🎨 Development Guidelines
+
+#### 📱 Responsive UI with Tailwind CSS
+- Ensure every component is **fully responsive** and visually consistent across screen sizes.
+- Follow Tailwind utility-first best practices for cleaner styling.
+
+#### 📁 Code Organization
+- Add all new components strictly inside the `src/components/` directory.
+- Follow **DRY (Don't Repeat Yourself)** principles and maintain reusable component logic.
+- Use meaningful names for files, components, and commits.
+
+#### 🧹 Code Quality Standards
+- All code must follow **ESLint** and **Prettier** formatting rules configured in the project.
+- Only submit **clean, modular, and properly formatted** code.
+
+### 🚀 Pull Request (PR) Guidelines
+
+#### 📤 Submitting a PR
+- Only open PRs linked to an **approved issue**.
+- Test your feature or fix thoroughly before submission.
+- Include a **clear PR description** with a short explanation of what was added or fixed.
+- If you're contributing UI changes, **attach a screenshot or GIF** in the PR description.
+- PRs with bugs or incomplete implementations may be closed or sent back for revisions.
+
+### 🕒 Task Assignment & Review Cycle
+- Tasks are reviewed and assigned **daily**.
+- PR reviews and feedback are provided regularly to maintain a smooth workflow.
+
+### 💬 Need Help?
+For queries or guidance, feel free to reach out to the project admin:
+
+- **GitHub**: [UjjwalSaini07](https://github.com/UjjwalSaini07)  
+- **LinkedIn**: [Ujjwal Saini](https://www.linkedin.com/in/ujjwalsaini07)
+
+### 🌟 Community Support
+- ⭐ Star the repository
+- 🫱🏽‍🫲🏽 Share it with others who may want to contribute
+- 💡 Suggest ideas, improvements, or enhancements
+
+Thanks again for being part of **Bharat Bhakti Yatra** — together, we build better! 🇮🇳🚀
+
+## 🌟GSSoc 
+![GSSoC Logo](https://github.com/user-attachments/assets/037512ae-e1a8-4bb6-ab78-2ddea76bf544)
+
+🌟 **Big Announcement!**
+
+🚀 This project is now officially part of **GirlScript Summer of Code (GSSoC) 2025!** 💻🎉  
+We’re excited to welcome contributors from across India and beyond to collaborate and grow with **Bharat-Bhakti-Yatra**. Let’s build something meaningful together and make open-source learning fun and rewarding! ✨
+
+🎉 **Excited to onboard new contributors for GSSoC 2025!**  
+Let’s build, learn, and grow — one meaningful commit at a time. 🔥
+
+## 🏆 **GSSoC 2025 Contribution Guidelines**
+
+### ✅ **Do's**
+- Read the project documentation before contributing
+- Follow the coding standards and folder structure
+- Write clear and meaningful commit messages
+- Test your changes before submitting a PR
+- Be respectful, collaborative, and maintain a positive environment
+- Ask for help whenever you're unsure — collaboration > assumption
+
+### ❌ **Don'ts**
+- Don’t spam PRs or create multiple PRs for the same issue
+- Don’t copy-paste code without understanding it
+- Don’t make unnecessary or unrelated changes
+- Don’t ignore review feedback from mentors or maintainers
+- Don’t forget to update relevant documentation when needed
+
+### 🎯 **Contribution Levels**
+| Level | Description | Points | Badge |
+|-------|-------------|--------|-------|
+| 🥉 **Beginner** | Fix typos, update docs, minor bug fixes | 3 | ![1](https://img.shields.io/badge/Level-1-green) |
+| 🥈 **Intermediate** | Add features, improve UI/UX, performance | 7 | ![2](https://img.shields.io/badge/Level-2-blue) |
+| 🥇 **Advanced** | Major features, architecture improvements | 10 | ![3](https://img.shields.io/badge/Level-3-red) |
+
 ## 📚 Helpful References
 
 - 🔒 [Security Policy](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/blob/main/SECURITY.md) – Learn how we keep the project safe and secure.
@@ -151,8 +238,19 @@ You can visit the live site here : [WebLink](https://bharatbhakti-yatra.vercel.a
 - [Firebase Documentation](https://firebase.google.com/docs)
 - [Docker Documentation](https://docs.docker.com/)
 
-## Author ✍️
-- [@Ujjwal Saini](https://github.com/UjjwalSaini07)
+## 👤 Project Admin
+
+| Designation           | Name           | Profile                                                                                   |
+|----------------|----------------|-------------------------------------------------------------------------------------------|
+| Project Lead | Ujjwal Saini | [🔗 GitHub](https://github.com/UjjwalSaini07) \| [🔗 LinkedIn](https://www.linkedin.com/in/ujjwalsaini07) |
+| Project Co-Lead | Gayatri Singh | [🔗 GitHub](https://github.com/Gayatrisin123) \| [🔗 LinkedIn](https://www.linkedin.com/in/gayatri-singh-5012b5301/) |
+
+## Contributors
+
+View the full list of contributors on the [GitHub Contributors Graph](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/graphs/contributors).
+
+#### Thanks to all the wonderful contributors 💖
+[![Contributors](https://contrib.rocks/image?repo=UjjwalSaini07/Bharat-Bhakti-Yatra)](https://github.com/UjjwalSaini07/Bharat-Bhakti-Yatra/graphs/contributors)
 
 ## Contact 📞
 Feel free to reach out if you have any questions or suggestions!
