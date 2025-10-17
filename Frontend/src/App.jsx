@@ -12,6 +12,8 @@ import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import EmailVerificationPage from "./pages/auth/EmailVerificationPage";
 import Pujas from './components/Pujas';
 import BlogWrapper from "./components/blog/BlogWrapper";
+import TermsAndConditions from './components/TermsAndConditions'
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -60,6 +62,8 @@ const App = () => {
           {/* Open Routes Routes */}
           <Route path="/pujas" element={<Pujas />} />
           <Route path="/blog" element={<BlogWrapper />} />
+          <Route path="/terms" element={<TermsAndConditions/>} />
+          <Route path="/privacy" element={<PrivacyPolicy/>} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
