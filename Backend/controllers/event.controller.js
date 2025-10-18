@@ -40,6 +40,9 @@ export const createEvent = async (req, res) => {
       event: newEvent,
     });
   } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
     res.status(500).json({ success: false, message: error.message });
   }
 };
