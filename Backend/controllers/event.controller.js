@@ -89,7 +89,11 @@ export const updateEvent = async (req, res) => {
         return res.status(400).json({ success: false, message: "Invalid event ID format" });
     }
 
-    const updatedEvent = await Event.findByIdAndUpdate(id, req.body, {
+    // Whitelist updatable fields
+    const allowedFields = (({ title, description, date, time, location, eventType, organizer }) => 
+      ({ title, description, date, time, location, eventType, organizer }))(req.body);
+
+    const updatedEvent = await Event.findByIdAndUpdate(id, allowedFields, {
       new: true, // Return the updated document
       runValidators: true, // Ensure updates adhere to schema validation
     });
