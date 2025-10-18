@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import connectDB from "./database/connectDB.js";
 import authRoutes from "./routers/auth.route.js";
+import eventRoutes from "./routers/event.route.js";
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ const startServer = async () => {
     console.log(chalk.green.bold("✅ MongoDB Connected"));
 
     app.use("/api/auth", authRoutes);
+      app.use("/api/events", eventRoutes);
 
     if (process.env.NODE_ENV === "production") {
       app.use(express.static(path.join(__dirname, "/frontend/dist")));
