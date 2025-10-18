@@ -40,7 +40,7 @@ const startServer = async () => {
     console.log(chalk.green.bold("✅ MongoDB Connected"));
 
     app.use("/api/auth", authRoutes);
-      app.use("/api/events", eventRoutes);
+    app.use("/api/events", eventRoutes);
 
     if (process.env.NODE_ENV === "production") {
       app.use(express.static(path.join(__dirname, "/frontend/dist")));
