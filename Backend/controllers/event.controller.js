@@ -50,7 +50,7 @@ export const createEvent = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    const events = await Event.find({}).sort({ date: 1 }); // Sort by upcoming date
+    const events = await Event.find({}).sort({ date: 1 }).lean(); // Sort by upcoming date
     res.status(200).json({ success: true, events });
   } catch (error) {
     res.status(500).json({ success: false, message: "Server error" });
