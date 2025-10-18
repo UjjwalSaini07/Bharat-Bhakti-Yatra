@@ -31,7 +31,6 @@ const SacredVideosSection = () => {
   }
 ];
 
-  ];
 
   return (
     <section className="relative py-20 bg-gradient-to-br from-gray-50 to-orange-50 overflow-hidden">
