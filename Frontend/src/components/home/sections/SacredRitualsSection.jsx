@@ -5,7 +5,8 @@ const SacredVideosSection = () => {
     {
       title: "Mahaarti Ganga Aarti",
       description: "Experience the divine evening aarti at River Ganga",
-      videoId: "iplTu8D6JxU", //  // Updated videoId from the new link
+     videoId: "ysz5S6PUM-U" // Example: YouTube official embed test video
+
       thumbnail: "/assets/hinduism/home/aarti.jpg"
     },
     {
