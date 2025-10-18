@@ -80,4 +80,3 @@ const SacredVideosSection = () => {
 };
 
 export default SacredVideosSection;
-export default SacredVideosSection;
