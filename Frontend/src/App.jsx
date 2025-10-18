@@ -14,9 +14,9 @@ import Pujas from './components/Pujas';
 import BlogWrapper from "./components/blog/BlogWrapper";
 import TermsAndConditions from './components/TermsAndConditions'
 import PrivacyPolicy from './components/PrivacyPolicy';
-
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import Layout from "./components/common/Layout";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -47,25 +47,27 @@ const App = () => {
       <Header />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
+          <Route element={<Layout />}>
 
-          {/* ✅ Protected Routes */}
-          <Route path="/profile" element={<ProtectedRoute><Userprofile /></ProtectedRoute>} />
+            <Route path="/" element={<Home />} />
 
-          {/* ✅ Public but Redirect if logged in */}
-          <Route path="/signup" element={<RedirectAuthenticatedUser><Signup /></RedirectAuthenticatedUser>} />
-          <Route path="/login" element={<RedirectAuthenticatedUser><Login /></RedirectAuthenticatedUser>} />
-          <Route path="/verify-email" element={<RedirectAuthenticatedUser><EmailVerificationPage /></RedirectAuthenticatedUser>} />
-          <Route path="/forgot-password" element={<RedirectAuthenticatedUser><ForgotPasswordPage /></RedirectAuthenticatedUser>} />
-          <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><ResetPasswordPage /></RedirectAuthenticatedUser>} />
+            {/* ✅ Protected Routes */}
+            <Route path="/profile" element={<ProtectedRoute><Userprofile /></ProtectedRoute>} />
 
-          {/* Open Routes Routes */}
-          <Route path="/pujas" element={<Pujas />} />
-          <Route path="/blog" element={<BlogWrapper />} />
-          <Route path="/terms" element={<TermsAndConditions/>} />
-          <Route path="/privacy" element={<PrivacyPolicy/>} />
+            {/* ✅ Public but Redirect if logged in */}
+            <Route path="/signup" element={<RedirectAuthenticatedUser><Signup /></RedirectAuthenticatedUser>} />
+            <Route path="/login" element={<RedirectAuthenticatedUser><Login /></RedirectAuthenticatedUser>} />
+            <Route path="/verify-email" element={<RedirectAuthenticatedUser><EmailVerificationPage /></RedirectAuthenticatedUser>} />
+            <Route path="/forgot-password" element={<RedirectAuthenticatedUser><ForgotPasswordPage /></RedirectAuthenticatedUser>} />
+            <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><ResetPasswordPage /></RedirectAuthenticatedUser>} />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+            {/* Open Routes Routes */}
+            <Route path="/pujas" element={<Pujas />} />
+            <Route path="/blog" element={<BlogWrapper />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
         </Routes>
       </AnimatePresence>
     </div>
