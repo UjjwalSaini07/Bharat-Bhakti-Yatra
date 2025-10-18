@@ -66,7 +66,7 @@ export const getEventById = async (req, res) => {
         return res.status(400).json({ success: false, message: "Invalid event ID format" });
     }
 
-    const event = await Event.findById(id);
+    const event = await Event.findById(id).lean();
 
     if (!event) {
       return res
