@@ -22,6 +22,15 @@ const SacredVideosSection = () => {
       videoId: "xWpzMfu2w5c",
       thumbnail: "/assets/hinduism/home/prayer.jpg"
     }
+      const videos = [
+  {
+    title: "Example Working Video",
+    description: "If this plays, your code and deployment are fine.",
+    videoId: "ysz5S6PUM-U", // ✅ YouTube official embeddable test video
+    thumbnail: "/assets/hinduism/home/aarti.jpg"
+  }
+];
+
   ];
 
   return (
