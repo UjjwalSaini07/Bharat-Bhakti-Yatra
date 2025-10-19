@@ -10,10 +10,10 @@ import Signup from "./pages/auth/Signup";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import EmailVerificationPage from "./pages/auth/EmailVerificationPage";
-import Pujas from './components/Pujas';
+import Pujas from './components/pujas/Pujas';
 import BlogWrapper from "./components/blog/BlogWrapper";
-import TermsAndConditions from './components/TermsAndConditions'
-import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsAndConditions from './components/legals/TermsAndConditions'
+import PrivacyPolicy from './components/legals/PrivacyPolicy';
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Layout from "./components/common/Layout";
