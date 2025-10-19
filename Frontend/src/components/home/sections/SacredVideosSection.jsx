@@ -5,19 +5,20 @@ const SacredVideosSection = () => {
     {
       title: "Mahaarti Ganga Aarti",
       description: "Experience the divine evening aarti at River Ganga",
-      videoId: "NVVJJKOtzAM",
+      videoId: "iplTu8D6JxU",  // Updated videoId 
       thumbnail: "/assets/hinduism/home/aarti.jpg"
     },
     {
       title: "Shri Krishna Janmashtami",
       description: "Celebrate the birth of Lord Krishna with devotional songs",
-      videoId: "J5Ek8rIErsQ",
+      videoId: "ZCXCu9_K0lY",  // Updated videoId 
       thumbnail: "/assets/hinduism/home/festival.jpg"
     },
     {
       title: "Ganga Dussehra Ghazipur",
       description: "Witness the grand Ganga Dussehra celebrations",
-      videoId: "DfEcL29mE0I",
+      // Updated videoId 
+      videoId: "xWpzMfu2w5c",
       thumbnail: "/assets/hinduism/home/prayer.jpg"
     }
   ];
@@ -38,12 +39,12 @@ const SacredVideosSection = () => {
             Immerse yourself in the divine atmosphere of our sacred ceremonies and festivals
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {videos.map((video, index) => (
             <div key={index} className="group">
               <div className="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:shadow-orange-500/25">
-                
+
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-400/0 via-transparent to-amber-600/0 group-hover:from-orange-400/30 group-hover:to-amber-600/30 rounded-xl transition-all duration-500 blur-sm"></div>
                 <div className="relative aspect-video">
                   <iframe
@@ -67,7 +68,7 @@ const SacredVideosSection = () => {
             </div>
           ))}
         </div>
-        
+
         <div className="text-center mt-12">
           <button className="bg-gradient-to-r from-orange-500 to-amber-600 text-white px-8 py-3 rounded-full font-semibold hover:from-orange-600 hover:to-amber-700 transition-all transform hover:scale-105 shadow-lg">
             View More Videos
