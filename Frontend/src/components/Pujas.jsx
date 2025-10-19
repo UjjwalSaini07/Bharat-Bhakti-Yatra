@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Search, Calendar, MapPin, Star, Clock, Users, Heart, Filter, ChevronRight, Sparkles, BookOpen, Shield, Flame, Award, TrendingUp, Gift, Flower2 } from 'lucide-react';
 
 const Pujas = () => {
@@ -6,6 +6,7 @@ const Pujas = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState([]);
   const [expandedPuja, setExpandedPuja] = useState(null);
+  const [sortOption, setSortOption] = useState('popularity');
 
   const categories = [
     'All',
@@ -181,6 +182,27 @@ const Pujas = () => {
     return matchesCategory && matchesSearch;
   });
 
+  // Apply sorting on the filtered list
+  const sortedPujas = useMemo(() => {
+    const arr = [...filteredPujas];
+    switch (sortOption) {
+      case 'price_asc':
+        return arr.sort((a, b) => a.price - b.price);
+      case 'price_desc':
+        return arr.sort((a, b) => b.price - a.price);
+      case 'rating':
+        return arr.sort((a, b) => b.rating - a.rating);
+      case 'popularity':
+      default:
+        // Popularity: prefer 'popular' flag first, then by reviews
+        return arr.sort((a, b) => {
+          const p = (b.popular ? 1 : 0) - (a.popular ? 1 : 0);
+          if (p !== 0) return p;
+          return b.reviews - a.reviews;
+        });
+    }
+  }, [filteredPujas, sortOption]);
+
   const toggleFavorite = (id) => {
     setFavorites(prev =>
       prev.includes(id) ? prev.filter(fav => fav !== id) : [...prev, id]
@@ -255,11 +277,15 @@ const Pujas = () => {
 
             <div className="flex items-center gap-2">
               <Filter className="w-5 h-5 text-gray-500" />
-              <select className="px-4 py-2 rounded-full border-2 border-orange-200 focus:border-orange-400 focus:outline-none bg-white shadow-sm">
-                <option>Sort by Popularity</option>
-                <option>Sort by Price: Low to High</option>
-                <option>Sort by Price: High to Low</option>
-                <option>Sort by Rating</option>
+              <select
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+                className="px-4 py-2 rounded-full border-2 border-orange-200 focus:border-orange-400 focus:outline-none bg-white shadow-sm"
+              >
+                <option value="popularity">Sort by Popularity</option>
+                <option value="price_asc">Sort by Price: Low to High</option>
+                <option value="price_desc">Sort by Price: High to Low</option>
+                <option value="rating">Sort by Rating</option>
               </select>
             </div>
           </div>
@@ -282,7 +308,7 @@ const Pujas = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {filteredPujas.map(puja => (
+          {sortedPujas.map(puja => (
             <div
               key={puja.id}
               className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group border border-orange-100"
