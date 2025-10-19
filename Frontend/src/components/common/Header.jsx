@@ -12,9 +12,10 @@ const Header = () => {
   const navigate = useNavigate();
 
   const { user, isAuthenticated, logout } = useAuthStore();
-  const auth = getAuth(FireBaseConfig);
+  const auth = FireBaseConfig ? getAuth(FireBaseConfig) : null;
 
   useEffect(() => {
+    if (!auth) return undefined;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
     });
@@ -23,7 +24,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     if (isAuthenticated) logout();
-    if (firebaseUser) {
+    if (firebaseUser && auth) {
       await signOut(auth);
       setFirebaseUser(null);
     }
