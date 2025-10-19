@@ -91,8 +91,8 @@ const Footer = () => {
         </div>
 
         {/* Social Links Section */}
-        <div className="mt-8 sm:mt-10 lg:mt-12 border-t border-gray-200 pt-6 sm:pt-8 text-center">
-          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6">
+        <div className="mt-8 sm:mt-10 lg:mt-12 border-t border-gray-400 pt-6 sm:pt-8 text-center">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-2">
             <a href="#" className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors">
               <FaFacebookF className="flex-shrink-0" />
               <span className="text-xs sm:text-sm">Follow us on Facebook</span>
@@ -111,10 +111,20 @@ const Footer = () => {
             </a>
           </div>
 
-          {/* Copyright */}
-          <p className="text-xs sm:text-sm text-gray-500 px-4">
-            © 2025 Bharat Bhakti Yatra. All Rights Reserved.
+          <div className="border-t border-white/20 pt-8 mb-4">
+            <div className="text-center text-[#ef7815] text-3xl font-playfair mb-4">
+              ❋ ॐ नमः शिवाय ❋
+            </div>
+        </div>
+
+        <div className="text-center">
+          <p className="text-gray-500 text-sm mb-2">
+            Made with ❤️ for Hindu devotees worldwide
           </p>
+          <p className="text-xs sm:text-sm text-gray-500 px-4">
+            © 2025 Bharat Bhakti Yatra. All rights reserved. | सर्वे भवन्तु सुखिनः
+          </p>
+        </div>
         </div>
       </div> 
     </footer>
