@@ -47,5 +47,7 @@ const eventSchema = new mongoose.Schema(
   }
 );
 
+// Add index to the date field to speed up queries
+eventSchema.index({ date: 1 });
 // Create the Event model from the schema
 export const Event = mongoose.model("Event", eventSchema);

@@ -40,6 +40,9 @@ export const createEvent = async (req, res) => {
       event: newEvent,
     });
   } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
     res.status(500).json({ success: false, message: error.message });
   }
 };
@@ -47,7 +50,7 @@ export const createEvent = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    const events = await Event.find({}).sort({ date: 1 }); // Sort by upcoming date
+    const events = await Event.find({}).sort({ date: 1 }).lean(); // Sort by upcoming date
     res.status(200).json({ success: true, events });
   } catch (error) {
     res.status(500).json({ success: false, message: "Server error" });
@@ -63,7 +66,7 @@ export const getEventById = async (req, res) => {
         return res.status(400).json({ success: false, message: "Invalid event ID format" });
     }
 
-    const event = await Event.findById(id);
+    const event = await Event.findById(id).lean();
 
     if (!event) {
       return res
@@ -86,7 +89,11 @@ export const updateEvent = async (req, res) => {
         return res.status(400).json({ success: false, message: "Invalid event ID format" });
     }
 
-    const updatedEvent = await Event.findByIdAndUpdate(id, req.body, {
+    // Whitelist updatable fields
+    const allowedFields = (({ title, description, date, time, location, eventType, organizer }) => 
+      ({ title, description, date, time, location, eventType, organizer }))(req.body);
+
+    const updatedEvent = await Event.findByIdAndUpdate(id, allowedFields, {
       new: true, // Return the updated document
       runValidators: true, // Ensure updates adhere to schema validation
     });
@@ -103,6 +110,9 @@ export const updateEvent = async (req, res) => {
       event: updatedEvent,
     });
   } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
     res.status(500).json({ success: false, message: error.message });
   }
 };
