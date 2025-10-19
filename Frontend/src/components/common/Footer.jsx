@@ -2,11 +2,6 @@ import React from "react";
 import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp, FaArrowUp } from "react-icons/fa";
 
 const Footer = () => {
-  // Smooth scroll-to-top function
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className="bg-white border-t border-gray-200 text-gray-700 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
@@ -121,16 +116,7 @@ const Footer = () => {
             © 2025 Bharat Bhakti Yatra. All Rights Reserved.
           </p>
         </div>
-      </div>
-
-      {/* Back to Top Button */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-orange-500 hover:bg-orange-600 text-white p-2.5 sm:p-3 rounded-full shadow-lg transition-all transform hover:scale-110 z-50"
-        aria-label="Back to top"
-      >
-        <FaArrowUp className="text-base sm:text-lg" />
-      </button>
+      </div> 
     </footer>
   );
 };
