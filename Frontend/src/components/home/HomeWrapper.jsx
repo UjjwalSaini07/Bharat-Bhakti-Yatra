@@ -3,6 +3,7 @@ import CommunitySection from './sections/CommunitySection';
 import { SacredTemples } from './sections/SacredTemples';
 import HeroSection from './sections/HeroSection';
 import { DailyPanchang } from './Panchang/DailyPanchang';
+import { SpritualGods } from './SpritualEntities/spritualgods';
 import { MantraCounter } from './chantings/MantraCounter';
 import { LiveDarshan } from './liveDharshan/liveTempleDharshan';
 import { Bhajans } from './bhajan/DivineBhajan';
@@ -15,6 +16,7 @@ const HomeWrapper = () => {
     <main>
       <HeroSection />
       <DailyPanchang />
+      <SpritualGods />
       <SacredTemples />
       <MantraCounter/>
       <LiveDarshan/>
