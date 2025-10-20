@@ -15,10 +15,10 @@ const PrivacyPolicy = () => {
   const [expandedSection, setExpandedSection] = useState(null);
 
   const sections = [
-  {
-    id: 1,
-    title: "Introduction",
-    content: `
+    {
+      id: 1,
+      title: "Introduction",
+      content: `
       <p>Welcome to <strong>Bharat Bhakti Yatra's Privacy Policy</strong>. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.</p>
 
       <p>By using <strong>Bharat Bhakti Yatra</strong>, you agree to the collection and use of information in accordance with this Privacy Policy. If you do not agree with our policies and practices, please do not use our services.</p>
@@ -33,11 +33,11 @@ const PrivacyPolicy = () => {
 
       <p>We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
     `,
-  },
-  {
-    id: 2,
-    title: "Information We Collect",
-    content: `
+    },
+    {
+      id: 2,
+      title: "Information We Collect",
+      content: `
       <p>We collect several types of information from users of our services. When you register or book services, we collect personal details such as name, email, phone number, date of birth, address, birth details for kundli and astrological services, gotra and family details for puja sankalp, and payment information.</p>
 
       <p>When you access our platform, we automatically collect certain information including:</p>
@@ -49,11 +49,11 @@ const PrivacyPolicy = () => {
 
       <p>We also store your communications with us, including emails, chat messages, support inquiries, and feedback. If you connect social media accounts, we may receive basic profile information as permitted by your privacy settings. Transaction records and billing addresses are maintained, though complete card details are not stored and are handled by secure payment gateways.</p>
     `,
-  },
-  {
-    id: 3,
-    title: "How We Use Your Information",
-    content: `
+    },
+    {
+      id: 3,
+      title: "How We Use Your Information",
+      content: `
       <p>We use collected information to provide and improve our services. This includes:</p>
       <ul class="list-disc pl-6">
         <li>Processing puja bookings and connecting you with pandits</li>
@@ -65,11 +65,11 @@ const PrivacyPolicy = () => {
 
       <p>Additionally, we analyze usage data to improve platform functionality, fix problems, develop new features, and personalize recommendations. Your information is also used to detect fraud, protect user rights, enforce terms, comply with legal obligations, and resolve disputes.</p>
     `,
-  },
-  {
-    id: 4,
-    title: "Security of Your Information",
-    content: `
+    },
+    {
+      id: 4,
+      title: "Security of Your Information",
+      content: `
       <p>We implement technical and organizational measures to protect your information. This includes SSL/TLS encryption, secure servers, firewalls, PCI-compliant payment gateways, and regular security assessments.</p>
 
       <p>Only authorized personnel access personal information. Employees are trained on security practices and have limited access based on their roles. Information is stored on secure servers with regular backups and encryption for sensitive data.</p>
@@ -78,11 +78,11 @@ const PrivacyPolicy = () => {
   xyz@outlook.com
 </a></strong>.</p>
     `,
-  },
-  {
-    id: 5,
-    title: "Cookies",
-    content: `
+    },
+    {
+      id: 5,
+      title: "Cookies",
+      content: `
       <p>We use cookies and tracking technologies to enhance your experience. Cookies are small text files stored on your device that help us recognize you and remember preferences.</p>
 
       <p>Types of cookies we use include:</p>
@@ -95,20 +95,20 @@ const PrivacyPolicy = () => {
 
       <p>You can control cookies through browser settings, though disabling essential cookies may affect functionality. Some cookies come from third-party services like analytics providers and payment processors.</p>
     `,
-  },
-  {
-    id: 6,
-    title: "Changes to This Privacy Policy",
-    content: `
+    },
+    {
+      id: 6,
+      title: "Changes to This Privacy Policy",
+      content: `
       <p>We may modify this Privacy Policy to reflect changes in practices, technology, or legal requirements. We notify you of material changes via email, platform notices, or account dashboard. The "Last Updated" date indicates when changes were made.</p>
 
       <p>We encourage you to review this policy periodically. Continued use after changes constitutes acceptance. For significant changes, we provide at least 30 days' notice before they take effect. If you disagree with changes, you may close your account.</p>
     `,
-  },
-  {
-    id: 7,
-    title: "Contact Us",
-    content: `
+    },
+    {
+      id: 7,
+      title: "Contact Us",
+      content: `
       <p>For questions or concerns regarding this Privacy Policy, contact us at <strong><a href="mailto:xyz@outlook.com" class="text-orange-600 font-bold hover:underline">
   xyz@outlook.com
 </a></strong> for privacy inquiries, data requests, and concerns. You can reach us by phone at <strong><a href="tel:+9199999999" class="text-orange-600 font-bold hover:underline">
@@ -123,8 +123,8 @@ const PrivacyPolicy = () => {
 
       <p>We respond to privacy inquiries within <strong>7 business days</strong>. We may verify your identity before processing requests to protect your privacy.</p>
     `,
-  },
-];
+    },
+  ];
 
   const toggleSection = (id) => {
     setExpandedSection(expandedSection === id ? null : id);
@@ -180,11 +180,11 @@ const PrivacyPolicy = () => {
                 Your Privacy Matters
               </h3>
               <p className="text-gray-700 leading-relaxed">
-                At Bharat Bhakti Yatra, we are committed to protecting your privacy and
-                ensuring the security of your personal information. This policy
-                explains how we handle your data with the utmost care and
-                respect, especially when dealing with sensitive spiritual and
-                personal matters.
+                At Bharat Bhakti Yatra, we are committed to protecting your
+                privacy and ensuring the security of your personal information.
+                This policy explains how we handle your data with the utmost
+                care and respect, especially when dealing with sensitive
+                spiritual and personal matters.
               </p>
             </div>
           </div>

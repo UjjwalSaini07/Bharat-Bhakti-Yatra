@@ -12,18 +12,31 @@ const Header = () => {
   const navigate = useNavigate();
 
   const { user, isAuthenticated, logout } = useAuthStore();
-  const auth = getAuth(FireBaseConfig);
+  const auth = FireBaseConfig ? getAuth(FireBaseConfig) : null;
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   useEffect(() => {
+    if (!auth) return undefined;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
     });
     return () => unsubscribe();
   }, [auth]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+        setIsMoreOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const handleLogout = async () => {
     if (isAuthenticated) logout();
-    if (firebaseUser) {
+    if (firebaseUser && auth) {
       await signOut(auth);
       setFirebaseUser(null);
     }
@@ -47,18 +60,19 @@ const Header = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
+    { name: "Bhagwat Geeta", path: "/pujas" },
     { name: "Pujas", path: "/pujas" },
-    { name: "Chatdhara", path: "#" },
-    { name: "Astrology", path: "#" },
+    { name: "Chantings", path: "#" },
+    { name: "Bhakti Geets", path: "#" },
+    { name: "Chronicles", path: "#" },
     { name: "Kundli", path: "#" },
-    {name: "Blog", path: "/blog"}
+    { name: "Blogs", path: "/blog" }
   ];
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <Link to="/" className="flex items-center">
             <div className="w-10 h-10 flex items-center justify-center mr-3">
               <img
@@ -75,8 +89,8 @@ const Header = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
+          <nav className="hidden md:flex items-center space-x-8 relative">
+            {navLinks.slice(0, 5).map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
@@ -85,6 +99,39 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
+
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                className="flex items-center gap-1 text-gray-700 hover:text-orange-500 font-medium transition-colors"
+              >
+                More
+                <svg
+                  className={`w-4 h-4 transform transition-transform duration-200 ${
+                    isMoreOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {isMoreOpen && (
+                <div className="absolute bg-white shadow-lg rounded-lg mt-2 py-2 w-40 z-50">
+                  {navLinks.slice(5).map((link) => (
+                    <Link
+                      key={link.name}
+                      to={link.path}
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Auth / Profile Desktop */}
@@ -199,12 +246,6 @@ const Header = () => {
                 </Link>
               </div>
             )}
-
-            <div className="py-4 border-t border-gray-100">
-              <button className="bg-gradient-to-r from-orange-500 to-amber-600 text-white px-6 py-2 rounded-full hover:from-orange-600 hover:to-amber-700 transition-all font-medium w-full">
-                Join Now
-              </button>
-            </div>
           </div>
         )}
       </div>

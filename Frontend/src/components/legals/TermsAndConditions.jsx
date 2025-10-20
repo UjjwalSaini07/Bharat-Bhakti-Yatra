@@ -12,17 +12,17 @@ const TermsAndConditions = () => {
   const [expandedSection, setExpandedSection] = useState(null);
 
   const sections = [
-  {
-    id: 1,
-    title: 'Introduction',
-    content: `<p>Welcome to <strong>Bharat Bhakti Yatra</strong>! By using our platform, you agree to these Terms and Conditions. Please read them carefully.</p>
+    {
+      id: 1,
+      title: "Introduction",
+      content: `<p>Welcome to <strong>Bharat Bhakti Yatra</strong>! By using our platform, you agree to these Terms and Conditions. Please read them carefully.</p>
 
-<p>We provide Vedic puja booking services connecting devotees with verified pandits for authentic spiritual ceremonies. By accessing our services, you acknowledge that you have read and agreed to be bound by these Terms and our <strong>Privacy Policy</strong>. We reserve the right to modify these terms, and continued use constitutes acceptance of changes.</p>`
-  },
-  {
-    id: 2,
-    title: 'Use of Services',
-    content: `<p>You must be at least 18 years old to use our services. By using Bharat Bhakti Yatra, you represent that you meet this requirement and have legal capacity to enter these Terms.</p>
+<p>We provide Vedic puja booking services connecting devotees with verified pandits for authentic spiritual ceremonies. By accessing our services, you acknowledge that you have read and agreed to be bound by these Terms and our <strong>Privacy Policy</strong>. We reserve the right to modify these terms, and continued use constitutes acceptance of changes.</p>`,
+    },
+    {
+      id: 2,
+      title: "Use of Services",
+      content: `<p>You must be at least 18 years old to use our services. By using Bharat Bhakti Yatra, you represent that you meet this requirement and have legal capacity to enter these Terms.</p>
 
 <p><strong>Permitted Uses:</strong> Browse puja services, book ceremonies, communicate with pandits, make payments, and access spiritual resources for lawful purposes only.</p>
 
@@ -35,12 +35,12 @@ const TermsAndConditions = () => {
   <li>48+ hours before: Full refund</li>
   <li>24-48 hours before: 50% refund</li>
   <li>Less than 24 hours: Non-refundable (unless pandit unavailable)</li>
-</ul>`
-  },
-  {
-    id: 3,
-    title: 'User Accounts',
-    content: `<p>You must create an account to access certain features. You are responsible for maintaining confidentiality of your credentials and all account activities.</p>
+</ul>`,
+    },
+    {
+      id: 3,
+      title: "User Accounts",
+      content: `<p>You must create an account to access certain features. You are responsible for maintaining confidentiality of your credentials and all account activities.</p>
 
 <p><strong>Registration:</strong> Provide accurate, current information. Update promptly if changes occur. Do not use another person's account.</p>
 
@@ -48,12 +48,12 @@ const TermsAndConditions = () => {
 
 <p><strong>Termination:</strong> We reserve the right to suspend or terminate your account for violating these Terms, fraudulent activity, or to protect our platform. You may also terminate anytime by contacting support.</p>
 
-<p><strong>Account Data:</strong> Your account stores booking history, payment information, preferences, and communications. You can access, modify, or delete your data per our <strong>Privacy Policy</strong>.</p>`
-  },
-  {
-    id: 4,
-    title: 'Intellectual Property',
-    content: `<p>All platform content—text, graphics, logos, audio, video, data, and software—is our property or supplied by our licensors, protected by Indian and international copyright and trademark laws.</p>
+<p><strong>Account Data:</strong> Your account stores booking history, payment information, preferences, and communications. You can access, modify, or delete your data per our <strong>Privacy Policy</strong>.</p>`,
+    },
+    {
+      id: 4,
+      title: "Intellectual Property",
+      content: `<p>All platform content—text, graphics, logos, audio, video, data, and software—is our property or supplied by our licensors, protected by Indian and international copyright and trademark laws.</p>
 
 <p><strong>Trademarks:</strong> Bharat Bhakti Yatra and our logos are protected marks. Do not use without written permission. Other marks are the property of their respective owners.</p>
 
@@ -61,12 +61,12 @@ const TermsAndConditions = () => {
 
 <p><strong>Restrictions:</strong> Do not copy, reproduce, distribute, modify, or create derivatives from our content without permission. No reverse engineering or decompiling of our software.</p>
 
-<p><strong>Copyright Infringement:</strong> We respect intellectual property rights. Report alleged infringement with detailed information to our support team.</p>`
-  },
-  {
-    id: 5,
-    title: 'Limitation of Liability',
-    content: `<p>To the fullest extent permitted by law, we are not liable for indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, use, or goodwill.</p>
+<p><strong>Copyright Infringement:</strong> We respect intellectual property rights. Report alleged infringement with detailed information to our support team.</p>`,
+    },
+    {
+      id: 5,
+      title: "Limitation of Liability",
+      content: `<p>To the fullest extent permitted by law, we are not liable for indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, use, or goodwill.</p>
 
 <p><strong>Service Availability:</strong> We strive for high availability but do not guarantee uninterrupted service. Unavailability due to maintenance or circumstances beyond our control is not our liability.</p>
 
@@ -74,12 +74,12 @@ const TermsAndConditions = () => {
 
 <p><strong>Third-Party Links:</strong> We are not responsible for third-party websites, content, or services linked from our platform. Use at your own risk.</p>
 
-<p><strong>Maximum Liability:</strong> Our total liability does not exceed amounts you paid us in the six months before the claim, or ₹10,000, whichever is less. You indemnify us from claims arising from your use or Terms violations.</p>`
-  },
-  {
-    id: 6,
-    title: 'Termination',
-    content: `<p>We reserve the right to suspend or terminate your access anytime, with or without cause or notice. Upon termination, your service rights immediately cease.</p>
+<p><strong>Maximum Liability:</strong> Our total liability does not exceed amounts you paid us in the six months before the claim, or ₹10,000, whichever is less. You indemnify us from claims arising from your use or Terms violations.</p>`,
+    },
+    {
+      id: 6,
+      title: "Termination",
+      content: `<p>We reserve the right to suspend or terminate your access anytime, with or without cause or notice. Upon termination, your service rights immediately cease.</p>
 
 <p><strong>Grounds for Termination:</strong> Violation of Terms, fraudulent or illegal activities, abuse of pandits or staff, repeated unjustified cancellations, or legal requirements.</p>
 
@@ -87,12 +87,12 @@ const TermsAndConditions = () => {
 
 <p><strong>User-Initiated Termination:</strong> Contact support to terminate your account. We deactivate accounts within 48 hours. Note: Termination does not automatically cancel pending bookings.</p>
 
-<p><strong>Post-Termination:</strong> Cease all service use and delete obtained materials. Outstanding payment obligations remain. We may retain information for legal or regulatory purposes.</p>`
-  },
-  {
-    id: 7, 
-    title: 'Pandit Services & Quality',
-    content: `<p>All pandits are carefully verified for knowledge, experience, and adherence to traditional Vedic practices. We act as a platform and are not directly responsible for ceremony conduct.</p>
+<p><strong>Post-Termination:</strong> Cease all service use and delete obtained materials. Outstanding payment obligations remain. We may retain information for legal or regulatory purposes.</p>`,
+    },
+    {
+      id: 7,
+      title: "Pandit Services & Quality",
+      content: `<p>All pandits are carefully verified for knowledge, experience, and adherence to traditional Vedic practices. We act as a platform and are not directly responsible for ceremony conduct.</p>
 
 <p><strong>Verification:</strong> Pandits undergo thorough background checks, qualification validation, reference checks, and ongoing performance monitoring based on user feedback.</p>
 
@@ -100,12 +100,12 @@ const TermsAndConditions = () => {
 
 <p><strong>User Feedback & Disputes:</strong> We encourage honest reviews to maintain quality and assist users. We investigate serious complaints and mediate disputes between users and pandits.</p>
 
-<p><strong>Performance Management:</strong> We regularly review pandit performance. Those with consistently poor ratings or standard violations may be removed from our platform.</p>`
-  },
-  {
-    id: 8, 
-    title: 'Governing Law & Dispute Resolution',
-    content: `<p>These Terms are governed by Indian law. Any disputes are subject to the exclusive jurisdiction of Mumbai, Maharashtra courts.</p>
+<p><strong>Performance Management:</strong> We regularly review pandit performance. Those with consistently poor ratings or standard violations may be removed from our platform.</p>`,
+    },
+    {
+      id: 8,
+      title: "Governing Law & Dispute Resolution",
+      content: `<p>These Terms are governed by Indian law. Any disputes are subject to the exclusive jurisdiction of Mumbai, Maharashtra courts.</p>
 
 <p><strong>Dispute Resolution Process:</strong> Contact customer support first for amicable resolution. If unsuccessful, parties agree to attempt mediation before litigation.</p>
 
@@ -113,22 +113,20 @@ const TermsAndConditions = () => {
 
 <p><strong>Class Action Waiver:</strong> All proceedings are individual, not class actions or consolidated proceedings.</p>
 
-<p><strong>Time Limitation:</strong> Any claim must be filed within one year of arising, or it is forever barred.</p>`
-  },
-  {
-    id: 9,
-    title: 'Amendments & Updates',
-    content: `<p>We reserve the right to modify these Terms anytime. Changes are effective immediately upon posting unless otherwise stated.</p>
+<p><strong>Time Limitation:</strong> Any claim must be filed within one year of arising, or it is forever barred.</p>`,
+    },
+    {
+      id: 9,
+      title: "Amendments & Updates",
+      content: `<p>We reserve the right to modify these Terms anytime. Changes are effective immediately upon posting unless otherwise stated.</p>
 
 <p><strong>Notification:</strong> Material changes are communicated via email, platform notifications, or prominent notices. Continued use constitutes acceptance.</p>
 
 <p><strong>Your Responsibility:</strong> Review these Terms periodically for updates. Disagreement with modifications means you should discontinue use and close your account.</p>
 
-<p><strong>Record Keeping:</strong> Previous versions are archived and available upon request for transparency and compliance.</p>`
-  },
-];
-
-
+<p><strong>Record Keeping:</strong> Previous versions are archived and available upon request for transparency and compliance.</p>`,
+    },
+  ];
 
   const toggleSection = (id) => {
     setExpandedSection(expandedSection === id ? null : id);
