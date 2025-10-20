@@ -5,7 +5,8 @@ import HeroSection from './sections/HeroSection';
 import { MantraCounter } from './chantings/MantraCounter';
 import { LiveDarshan } from './liveDharshan/liveTempleDharshan';
 import { Bhajans } from './bhajan/DivineBhajan';
-import SacredRitualsSection from './sections/SacredRitualsSection';
+import { Festivals } from './festivalCalendar/festivalCalendar';
+import { ScriptureLibrary } from './Scriptures/ScriptureLibrary';
 import SacredVideosSection from './sections/SacredVideosSection';
 
 const HomeWrapper = () => {
@@ -16,8 +17,9 @@ const HomeWrapper = () => {
       <MantraCounter/>
       <LiveDarshan/>
       <Bhajans/>
-      <SacredRitualsSection />
       <SacredVideosSection />
+      <Festivals />
+      <ScriptureLibrary />
       <CommunitySection />
     </main>
   );
