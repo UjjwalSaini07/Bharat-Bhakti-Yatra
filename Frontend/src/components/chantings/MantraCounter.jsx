@@ -14,16 +14,16 @@ const MANTRAS = [
 ];
 
 const QUOTES = [
-  { text: "Mantra chanting creates sacred vibrations that align you with divine energy.", audio: "/audio/quotes/quote1.mp3", },
-  { text: "Through repetition, the heart becomes still, and the soul awakens.", audio: "/audio/quotes/quote2.mp3", },
-  { text: "Each chant is a step closer to inner peace and divine love.", audio: "/audio/quotes/quote3.mp3", },
-  { text: "Mantras purify your mind, filling it with light and clarity.", audio: "/audio/quotes/quote4.mp3", },
-  { text: "Chanting connects your breath, sound, and spirit into harmony.", audio: "/audio/quotes/quote5.mp3", },
-  { text: "A focused mind becomes a temple; a mantra, the key to open it.", audio: "/audio/quotes/quote6.mp3", },
-  { text: "Every repetition removes one layer of illusion and reveals truth.", audio: "/audio/quotes/quote7.mp3", },
-  { text: "The vibration of Om echoes through every particle of existence.", audio: "/audio/quotes/quote8.mp3", },
-  { text: "Mantra is the sound-body of the Divine — chant to embody it.", audio: "/audio/quotes/quote9.mp3", },
-  { text: "Through devotion and rhythm, the Infinite becomes felt within.", audio: "/audio/quotes/quote10.mp3", },
+  { text: "Mantra chanting creates sacred vibrations that align you with divine energy.", audio: "/audios/quotes/quote1.mp3", },
+  { text: "Through repetition, the heart becomes still, and the soul awakens.", audio: "/audios/quotes/quote2.mp3", },
+  { text: "Each chant is a step closer to inner peace and divine love.", audio: "/audios/quotes/quote3.mp3", },
+  { text: "Mantras purify your mind, filling it with light and clarity.", audio: "/audios/quotes/quote4.mp3", },
+  { text: "Chanting connects your breath, sound, and spirit into harmony.", audio: "/audios/quotes/quote5.mp3", },
+  { text: "A focused mind becomes a temple; a mantra, the key to open it.", audio: "/audios/quotes/quote6.mp3", },
+  { text: "Every repetition removes one layer of illusion and reveals truth.", audio: "/audios/quotes/quote7.mp3", },
+  { text: "The vibration of Om echoes through every particle of existence.", audio: "/audios/quotes/quote8.mp3", },
+  { text: "Mantra is the sound-body of the Divine — chant to embody it.", audio: "/audios/quotes/quote9.mp3", },
+  { text: "Through devotion and rhythm, the Infinite becomes felt within.", audio: "/audios/quotes/quote10.mp3", },
 ];
 
 const STORAGE_KEY = "mantra-progress";
