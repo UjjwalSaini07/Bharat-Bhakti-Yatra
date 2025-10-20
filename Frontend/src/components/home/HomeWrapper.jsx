@@ -1,15 +1,15 @@
 import React from 'react';
-import CommunitySection from './sections/CommunitySection';
-import { SacredTemples } from './sections/SacredTemples';
-import HeroSection from './sections/HeroSection';
+import HeroSection from './hero/HeroSection';
 import { DailyPanchang } from './Panchang/DailyPanchang';
 import { SpritualGods } from './SpritualEntities/spritualgods';
+import { SacredTemples } from './temples/SacredTemples';
 import { MantraCounter } from './chantings/MantraCounter';
 import { LiveDarshan } from './liveDharshan/liveTempleDharshan';
 import { Bhajans } from './bhajan/DivineBhajan';
+import SacredVideosSection from './video/SacredVideosSection';
 import { Festivals } from './festivalCalendar/festivalCalendar';
 import { ScriptureLibrary } from './Scriptures/ScriptureLibrary';
-import SacredVideosSection from './sections/SacredVideosSection';
+import CommunitySection from './community/CommunitySection';
 
 const HomeWrapper = () => {
   return (
