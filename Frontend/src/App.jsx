@@ -7,7 +7,7 @@ import Header from "./components/common/Header";
 import Layout from "./components/common/Layout";
 import CommingSoon from "./components/common/commingSoon";
 import { useAuthStore } from "./store/authStore";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import Userprofile from "./components/users/userProfile";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
@@ -15,7 +15,7 @@ import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import EmailVerificationPage from "./pages/auth/EmailVerificationPage";
 import Pujas from './components/pujas/Pujas';
-import BlogWrapper from "./components/blog/BlogWrapper";
+import Blog from "./pages/blogs/blog";
 import TermsAndConditions from './components/legals/TermsAndConditions'
 import PrivacyPolicy from './components/legals/PrivacyPolicy';
 
@@ -64,7 +64,7 @@ const App = () => {
 
             {/* Open Routes */}
             <Route path="/pujas" element={<Pujas />} />
-            <Route path="/blog" element={<BlogWrapper />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/terms" element={<TermsAndConditions />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="*" element={<Navigate to="/" replace />} />
