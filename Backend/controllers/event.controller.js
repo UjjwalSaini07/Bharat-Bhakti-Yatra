@@ -82,39 +82,40 @@ export const getEventById = async (req, res) => {
 
 
 export const updateEvent = async (req, res) => {
-  try {
-    const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ success: false, message: "Invalid event ID format" });
-    }
+     if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ success: false, message: "Invalid event ID format" });
+    }
 
-    // Whitelist updatable fields
-    const allowedFields = (({ title, description, date, time, location, eventType, organizer }) => 
-      ({ title, description, date, time, location, eventType, organizer }))(req.body);
 
-    const updatedEvent = await Event.findByIdAndUpdate(id, allowedFields, {
-      new: true, // Return the updated document
-      runValidators: true, // Ensure updates adhere to schema validation
-    });
+    const updatedEvent = await Event.findByIdAndUpdate(
+        id, 
+        req.body, // Pass req.body directly
+        {
+          new: true, // Return the updated document
+          runValidators: true, // Ensure updates adhere to schema validation
+      }
+    );
 
-    if (!updatedEvent) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Event not found" });
-    }
+    if (!updatedEvent) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Event not found" });
+    }
 
-    res.status(200).json({
-      success: true,
-      message: "Event updated successfully",
-      event: updatedEvent,
-    });
-  } catch (error) {
-    if (error instanceof mongoose.Error.ValidationError) {
-      return res.status(400).json({ success: false, message: error.message });
-    }
-    res.status(500).json({ success: false, message: error.message });
-  }
+    res.status(200).json({
+      success: true,
+      message: "Event updated successfully",
+      event: updatedEvent,
+    });
+  } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 
