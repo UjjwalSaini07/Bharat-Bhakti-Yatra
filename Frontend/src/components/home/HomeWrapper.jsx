@@ -1,8 +1,8 @@
 import React from 'react';
 import CommunitySection from './sections/CommunitySection';
-import FeatureCards from './sections/FeatureCards';
+import { SacredTemples } from './sections/SacredTemples';
 import HeroSection from './sections/HeroSection';
-import { MantraCounter } from '../chantings/MantraCounter';
+import { MantraCounter } from './chantings/MantraCounter';
 import SacredRitualsSection from './sections/SacredRitualsSection';
 import SacredVideosSection from './sections/SacredVideosSection';
 
@@ -10,7 +10,7 @@ const HomeWrapper = () => {
   return (
     <main>
       <HeroSection />
-      <FeatureCards />
+      <SacredTemples />
       <MantraCounter/>
       <SacredRitualsSection />
       <SacredVideosSection />
