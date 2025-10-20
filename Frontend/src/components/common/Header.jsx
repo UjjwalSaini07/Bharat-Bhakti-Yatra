@@ -60,12 +60,12 @@ const Header = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Bhagwat Geeta", path: "/pujas" },
+    { name: "Bhagwat Geeta", path: "/bhagwat-geeta" },
     { name: "Pujas", path: "/pujas" },
-    { name: "Chantings", path: "#" },
-    { name: "Bhakti Geets", path: "#" },
-    { name: "Chronicles", path: "#" },
-    { name: "Kundli", path: "#" },
+    { name: "Chantings", path: "/chantings" },
+    { name: "Bhakti Geets", path: "/bhaktigeets" },
+    { name: "Chronicles", path: "/chronicles" },
+    { name: "Kundli", path: "/kundli" },
     { name: "Blogs", path: "/blog" }
   ];
 

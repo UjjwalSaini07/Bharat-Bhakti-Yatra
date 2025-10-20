@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
-import Header from "./components/common/Header";
 import "./index.css";
+import "./styles/App.scss";
+import { AnimatePresence } from "framer-motion";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import Header from "./components/common/Header";
+import Layout from "./components/common/Layout";
+import CommingSoon from "./components/common/commingSoon";
 import { useAuthStore } from "./store/authStore";
 import Home from "./pages/Home";
 import Userprofile from "./components/users/userProfile";
-import "./styles/App.scss";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
@@ -14,9 +18,6 @@ import Pujas from './components/pujas/Pujas';
 import BlogWrapper from "./components/blog/BlogWrapper";
 import TermsAndConditions from './components/legals/TermsAndConditions'
 import PrivacyPolicy from './components/legals/PrivacyPolicy';
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import Layout from "./components/common/Layout";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -61,12 +62,19 @@ const App = () => {
             <Route path="/forgot-password" element={<RedirectAuthenticatedUser><ForgotPasswordPage /></RedirectAuthenticatedUser>} />
             <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><ResetPasswordPage /></RedirectAuthenticatedUser>} />
 
-            {/* Open Routes Routes */}
+            {/* Open Routes */}
             <Route path="/pujas" element={<Pujas />} />
             <Route path="/blog" element={<BlogWrapper />} />
             <Route path="/terms" element={<TermsAndConditions />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="*" element={<Navigate to="/" replace />} />
+            
+            {/* Comming Soon Routes */}
+            <Route path="/bhagwat-geeta" element={<CommingSoon />} />
+            <Route path="/bhaktigeets" element={<CommingSoon />} />
+            <Route path="/chantings" element={<CommingSoon />} />
+            <Route path="/chronicles" element={<CommingSoon />} />
+            <Route path="/kundli" element={<CommingSoon />} />
           </Route>
         </Routes>
       </AnimatePresence>
