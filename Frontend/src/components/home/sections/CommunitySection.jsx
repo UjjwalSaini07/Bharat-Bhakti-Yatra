@@ -2,14 +2,17 @@ import React from 'react';
 
 const CommunitySection = () => {
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative py-20 overflow-hidden"
+      style={{
+          background: "linear-gradient(135deg, #9f1239 0%, #f97316 50%, #14532d 100%)",
+        }}
+    >
       <div className="absolute inset-0">
         <img 
           src="/assets/hinduism/home/image_temple_bg.jpg" 
           alt="Temple Background" 
           className="w-full h-full object-cover opacity-20"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/90 to-amber-600/90"></div>
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
