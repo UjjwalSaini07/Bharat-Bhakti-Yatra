@@ -66,7 +66,8 @@ const Header = () => {
     { name: "Bhakti Geets", path: "/bhaktigeets" },
     { name: "Chronicles", path: "/chronicles" },
     { name: "Kundli", path: "/kundli" },
-    { name: "Blogs", path: "/blog" }
+    { name: "Blogs", path: "/blog" },
+    {name: "Faq", path: "/faq" },
   ];
 
   return (

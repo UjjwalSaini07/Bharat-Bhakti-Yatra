@@ -18,6 +18,7 @@ import Pujas from './components/pujas/Pujas';
 import Blog from "./pages/blogs/blog";
 import TermsAndConditions from './components/legals/TermsAndConditions'
 import PrivacyPolicy from './components/legals/PrivacyPolicy';
+import FaqPage from "./components/faq/Faq";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -65,6 +66,7 @@ const App = () => {
             {/* Open Routes */}
             <Route path="/pujas" element={<Pujas />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/faq" element={<FaqPage />} />
             <Route path="/terms" element={<TermsAndConditions />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="*" element={<Navigate to="/" replace />} />
