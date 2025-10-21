@@ -34,7 +34,120 @@ const FaqPage = () => {
         { id: "account", name: "Account & Privacy", icon: <FaShieldAlt /> }
     ];
 
+const faqData = [
+  //  FEATURES
+  {
+    id: 1,
+    category: "features",
+    question: "What is Bharat Bhakti Yatra all about?",
+    answer:
+      "Bharat Bhakti Yatra is a spiritual journey that brings together people from Hindu, Muslim, Sikh, Jain and other faiths, celebrating India’s rich cultural & devotional heritage. It’s about unity, devotion, inner peace and shared experience."
+  },
+  {
+    id: 2,
+    category: "features",
+    question: "Who can participate in the Yatra?",
+    answer:
+      "Anyone who resonates with the spirit of devotion and harmony—regardless of religion, background or age—is welcome to join. The Yatra is inclusive and seeks to unite hearts."
+  },
+  {
+    id: 3,
+    category: "features",
+    question: "What kind of activities are included during the Yatra?",
+    answer:
+      "Expect devotional gatherings, community prayers, cultural programs, inter‐faith discussions, temple/holy-site visits, group meditations, and opportunities for connection and service."
+  },
+  {
+    id: 4,
+    category: "features",
+    question: "How do I register for the Yatra, and what does the registration include?",
+    answer:
+      "You can register online via the official website. Registration may include your booking of the journey, access to program schedules, guidance, community group, and any special events or blessings included."
+  },
+  {
+    id: 5,
+    category: "features",
+    question: "Is the Yatra safe and well organized?",
+    answer:
+      "Yes — the team ensures well-planned logistics, guidance, support and a safe environment for all participants. Community respect and care are central."
+  },
+  {
+    id: 6,
+    category: "features",
+    question: "How does the Yatra honour different faith traditions?",
+    answer:
+      "By creating spaces of respect, shared rituals, dialogues and cultural exchange, every faith’s voice is honoured. The Yatra emphasises unity in diversity and devotion beyond boundaries."
+  },
 
+  //  TECHNICAL
+  {
+    id: 7,
+    category: "technical",
+    question: "Can I use the Bharat Bhakti Yatra website on mobile?",
+    answer:
+      "Yes, our platform is fully responsive and works seamlessly on mobile, tablet, and desktop devices. You can even install it as a Progressive Web App (PWA) for quick access."
+  },
+  {
+    id: 8,
+    category: "technical",
+    question: "What should I do if I face any technical issues on the website?",
+    answer:
+      "If you encounter any issues such as login errors, slow loading, or broken links, please refresh the page, clear cache, or contact our support team for quick resolution."
+  },
+  {
+    id: 9,
+    category: "technical",
+    question: "Is there any offline access available?",
+    answer:
+      "Some content like Yatra schedules or devotional guides may be available offline after loading once. However, live updates and interactive features require an active internet connection."
+  },
+
+  //  AI & TRACKING
+  {
+    id: 10,
+    category: "AI & Tracking",
+    question: "Does Bharat Bhakti Yatra use AI or digital tools?",
+    answer:
+      "Yes, we use intelligent tools to enhance your spiritual experience — from interactive maps and digital darshan updates to guided meditation sessions and personalized journey insights."
+  },
+  {
+    id: 11,
+    category: "AI & Tracking",
+    question: "Can I track my participation or Yatra progress?",
+    answer:
+      "Yes! You can track your journey milestones, attended events, and engagement through your profile dashboard, helping you reflect on your spiritual growth throughout the Yatra."
+  },
+  {
+    id: 12,
+    category: "AI & Tracking",
+    question: "Will I receive personalized recommendations during the Yatra?",
+    answer:
+      "Our system may suggest personalized devotional content, temple visits, or group sessions based on your preferences and participation history."
+  },
+
+  //  ACCOUNT & PRIVACY
+  {
+    id: 13,
+    category: "account",
+    question: "How do I create an account and get started?",
+    answer:
+      "Simply click on the ‘Sign In’ or ‘Join Yatra’ button on our homepage. You can register with your email or Google account and fill in your basic details to begin your journey."
+  },
+  {
+    id: 14,
+    category: "account",
+    question: "Is my personal data secure and private?",
+    answer:
+      "Absolutely. We use industry-standard encryption and secure servers to protect your information. Your data will never be shared without consent and can be deleted anytime from your profile settings."
+  },
+  {
+    id: 15,
+    category: "account",
+    question: "Can I modify or delete my account later?",
+    answer:
+      "Yes, you can update your profile details or delete your account from the settings page. Once deleted, your personal data will be permanently removed from our system."
+  }
+];
 
 
     const filteredFAQs = faqData.filter(faq => {
